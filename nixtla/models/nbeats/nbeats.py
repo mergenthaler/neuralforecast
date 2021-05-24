@@ -18,7 +18,7 @@ from functools import partial
 
 from ...data.tsdataset import TimeSeriesDataset
 from ...data.tsloader import TimeSeriesLoader
-from .nbeats_model import NBeats, NBeatsBlock, IdentityBasis, TrendBasis, SeasonalityBasis
+from .nbeats_model import _NBEATS, _NBEATSBlock, IdentityBasis, TrendBasis, SeasonalityBasis
 from .nbeats_model import ExogenousBasisInterpretable, ExogenousBasisWavenet, ExogenousBasisTCN
 from ...losses.pytorch import MAPELoss, MASELoss, SMAPELoss, MSELoss, MAELoss, PinballLoss
 from ...losses.numpy import mae, mse, mape, smape, rmse, pinball_loss

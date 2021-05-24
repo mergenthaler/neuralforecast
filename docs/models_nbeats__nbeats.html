@@ -111,26 +111,25 @@ nb_path: "nbs/models_nbeats__nbeats.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">nixtla.data.datasets.epf</span> <span class="kn">import</span> <span class="n">EPF</span><span class="p">,</span> <span class="n">EPFInfo</span>
-<span class="kn">from</span> <span class="nn">nixtla.data.tsloader</span> <span class="kn">import</span> <span class="n">TimeSeriesLoader</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># from nixtla.data.datasets.epf import EPF, EPFInfo</span>
+<span class="c1"># from nixtla.data.tsloader import TimeSeriesLoader</span>
 
-<span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">rcParams</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-whitegrid&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;serif&#39;</span>
+<span class="c1"># import pylab as plt</span>
+<span class="c1"># from pylab import rcParams</span>
+<span class="c1"># plt.style.use(&#39;seaborn-whitegrid&#39;)</span>
+<span class="c1"># plt.rcParams[&#39;font.family&#39;] = &#39;serif&#39;</span>
 
-<span class="n">FONTSIZE</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="c1"># FONTSIZE = 19</span>
 
-<span class="c1"># Load and plot data</span>
-<span class="n">Y_df</span><span class="p">,</span> <span class="n">X_df</span><span class="p">,</span> <span class="n">S_df</span> <span class="o">=</span> <span class="n">EPF</span><span class="o">.</span><span class="n">load_groups</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NP&#39;</span><span class="p">])</span>
+<span class="c1"># # Load and plot data</span>
+<span class="c1"># Y_df, X_df, S_df = EPF.load_groups(directory=&#39;./data&#39;, groups=[&#39;NP&#39;])</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y_df</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> <span class="n">Y_df</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#628793&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Price [EUR/MWh]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="c1"># plt.savefig(&#39;./results/NP.png&#39;, bbox_inches = &#39;tight&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># fig = plt.figure(figsize=(15, 6))</span>
+<span class="c1"># plt.plot(Y_df.ds, Y_df.y.values, color=&#39;#628793&#39;, linewidth=0.4)</span>
+<span class="c1"># plt.ylabel(&#39;Price [EUR/MWh]&#39;, fontsize=19)</span>
+<span class="c1"># plt.xlabel(&#39;Date&#39;, fontsize=15)</span>
+<span class="c1"># # plt.savefig(&#39;./results/NP.png&#39;, bbox_inches = &#39;tight&#39;)</span>
+<span class="c1"># plt.show()</span>
 </pre></div>
 
     </div>
@@ -171,76 +170,76 @@ nb_path: "nbs/models_nbeats__nbeats.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nbeats&#39;</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;simple&#39;</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;activation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;selu&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># mc = {}</span>
+<span class="c1"># mc[&#39;model&#39;] = &#39;nbeats&#39;</span>
+<span class="c1"># mc[&#39;mode&#39;] = &#39;simple&#39;</span>
+<span class="c1"># mc[&#39;activation&#39;] = &#39;selu&#39;</span>
 
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;output_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">24</span><span class="o">*</span><span class="mi">7</span>
+<span class="c1"># mc[&#39;input_size_multiplier&#39;] = 1</span>
+<span class="c1"># mc[&#39;output_size&#39;] = 24*7</span>
 
-<span class="c1"># mc[&#39;input_size_multiplier&#39;] = 7</span>
-<span class="c1"># mc[&#39;output_size&#39;] = 24</span>
+<span class="c1"># # mc[&#39;input_size_multiplier&#39;] = 7</span>
+<span class="c1"># # mc[&#39;output_size&#39;] = 24</span>
 
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;stack_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trend&#39;</span><span class="p">,</span> <span class="s1">&#39;seasonality&#39;</span><span class="p">,</span> <span class="s1">&#39;exogenous_wavenet&#39;</span><span class="p">]</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_blocks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_layers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="c1"># mc[&#39;stack_types&#39;] = [&#39;trend&#39;, &#39;seasonality&#39;]</span>
-<span class="c1"># mc[&#39;n_blocks&#39;] = [1, 1]</span>
-<span class="c1"># mc[&#39;n_layers&#39;] = [2, 2]</span>
+<span class="c1"># mc[&#39;stack_types&#39;] = [&#39;trend&#39;, &#39;seasonality&#39;, &#39;exogenous_wavenet&#39;]</span>
+<span class="c1"># mc[&#39;n_blocks&#39;] = [1, 1, 1]</span>
+<span class="c1"># mc[&#39;n_layers&#39;] = [2, 2, 2]</span>
+<span class="c1"># # mc[&#39;stack_types&#39;] = [&#39;trend&#39;, &#39;seasonality&#39;]</span>
+<span class="c1"># # mc[&#39;n_blocks&#39;] = [1, 1]</span>
+<span class="c1"># # mc[&#39;n_layers&#39;] = [2, 2]</span>
 
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_hidden&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;exogenous_n_channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;x_s_n_hidden&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;shared_weights&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_harmonics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_polynomials&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># mc[&#39;n_hidden&#39;] = 128</span>
+<span class="c1"># mc[&#39;exogenous_n_channels&#39;] = 8</span>
+<span class="c1"># mc[&#39;x_s_n_hidden&#39;] = 0</span>
+<span class="c1"># mc[&#39;shared_weights&#39;] = False</span>
+<span class="c1"># mc[&#39;n_harmonics&#39;] = 4</span>
+<span class="c1"># mc[&#39;n_polynomials&#39;] = 2</span>
 
-<span class="c1"># Optimization and regularization parameters</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;initialization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lecun_normal&#39;</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0007</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;lr_decay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_lr_decay_steps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_iterations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="c1">#_000</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;early_stopping&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;eval_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;batch_normalization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;dropout_prob_theta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.51</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;dropout_prob_exogenous&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.44</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;l1_theta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;MAE&#39;</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;loss_hypar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;random_seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># # Optimization and regularization parameters</span>
+<span class="c1"># mc[&#39;initialization&#39;] = &#39;lecun_normal&#39;</span>
+<span class="c1"># mc[&#39;learning_rate&#39;] = 0.0007</span>
+<span class="c1"># mc[&#39;batch_size&#39;] = 128</span>
+<span class="c1"># mc[&#39;lr_decay&#39;] = 0.5</span>
+<span class="c1"># mc[&#39;n_lr_decay_steps&#39;] = 2</span>
+<span class="c1"># mc[&#39;n_iterations&#39;] = 20#_000</span>
+<span class="c1"># mc[&#39;early_stopping&#39;] = 20</span>
+<span class="c1"># mc[&#39;eval_freq&#39;] = 500</span>
+<span class="c1"># mc[&#39;batch_normalization&#39;] = False</span>
+<span class="c1"># mc[&#39;dropout_prob_theta&#39;] = 0.51</span>
+<span class="c1"># mc[&#39;dropout_prob_exogenous&#39;] = 0.44</span>
+<span class="c1"># mc[&#39;l1_theta&#39;] = 0</span>
+<span class="c1"># mc[&#39;weight_decay&#39;] = 0</span>
+<span class="c1"># mc[&#39;loss&#39;] = &#39;MAE&#39;</span>
+<span class="c1"># mc[&#39;loss_hypar&#39;] = 0.5</span>
+<span class="c1"># mc[&#39;val_loss&#39;] = mc[&#39;loss&#39;]</span>
+<span class="c1"># mc[&#39;random_seed&#39;] = 1</span>
 
-<span class="c1"># Data Parameters</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;idx_to_sample_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;val_idx_to_sample_freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">7</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_val_weeks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">52</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;window_sampling_limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">500_000</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;normalizer_y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;normalizer_x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;median&#39;</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;complete_inputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;H&#39;</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;seasonality&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="c1"># # Data Parameters</span>
+<span class="c1"># mc[&#39;len_sample_chunks&#39;] = None</span>
+<span class="c1"># mc[&#39;idx_to_sample_freq&#39;] = 1</span>
+<span class="c1"># mc[&#39;val_idx_to_sample_freq&#39;] = 24 * 7</span>
+<span class="c1"># mc[&#39;n_val_weeks&#39;] = 52</span>
+<span class="c1"># mc[&#39;window_sampling_limit&#39;] = 500_000</span>
+<span class="c1"># mc[&#39;normalizer_y&#39;] = None</span>
+<span class="c1"># mc[&#39;normalizer_x&#39;] = &#39;median&#39;</span>
+<span class="c1"># mc[&#39;complete_inputs&#39;] = False</span>
+<span class="c1"># mc[&#39;frequency&#39;] = &#39;H&#39;</span>
+<span class="c1"># mc[&#39;seasonality&#39;] = 24</span>
 
-<span class="c1"># # Within decomposition</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0005</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">256</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.00006</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_harmonics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_polynomials&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;dropout_prob_theta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;dropout_prob_exogenous&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># # # Within decomposition</span>
+<span class="c1"># mc[&#39;learning_rate&#39;] = 0.0005</span>
+<span class="c1"># mc[&#39;batch_size&#39;] = 256</span>
+<span class="c1"># mc[&#39;weight_decay&#39;] = 0.00006</span>
+<span class="c1"># mc[&#39;n_harmonics&#39;] = 2</span>
+<span class="c1"># mc[&#39;n_polynomials&#39;] = 4</span>
+<span class="c1"># mc[&#39;dropout_prob_theta&#39;] = 0</span>
+<span class="c1"># mc[&#39;dropout_prob_exogenous&#39;] = 0</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="mi">65</span><span class="o">*</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">mc</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="mi">65</span><span class="o">*</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+<span class="c1"># print(65*&#39;=&#39;)</span>
+<span class="c1"># print(pd.Series(mc))</span>
+<span class="c1"># print(65*&#39;=&#39;)</span>
 
-<span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_hidden&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;stack_types&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="p">[</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_hidden&#39;</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_hidden&#39;</span><span class="p">])]</span> <span class="p">]</span>
+<span class="c1"># mc[&#39;n_hidden&#39;] = len(mc[&#39;stack_types&#39;]) * [ [int(mc[&#39;n_hidden&#39;]), int(mc[&#39;n_hidden&#39;])] ]</span>
 </pre></div>
 
     </div>
@@ -320,58 +319,57 @@ dtype: object
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nixtla.experiments.utils</span> <span class="kn">import</span> <span class="n">create_datasets</span>
-<span class="c1"># from nixtla.models.nbeats.nbeats import Nbeats</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # from nixtla.models.nbeats.nbeats import Nbeats</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="s1">&#39;exogenous_wavenet&#39;</span> <span class="ow">in</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;stack_types&#39;</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;exogenous_tcn&#39;</span> <span class="ow">in</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;stack_types&#39;</span><span class="p">])):</span>
-    <span class="n">X_df</span> <span class="o">=</span> <span class="n">X_df</span><span class="p">[[</span><span class="s1">&#39;unique_id&#39;</span><span class="p">,</span> <span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="s1">&#39;week_day&#39;</span><span class="p">]]</span>
+<span class="c1"># if not ((&#39;exogenous_wavenet&#39; in mc[&#39;stack_types&#39;]) or (&#39;exogenous_tcn&#39; in mc[&#39;stack_types&#39;])):</span>
+<span class="c1">#     X_df = X_df[[&#39;unique_id&#39;, &#39;ds&#39;, &#39;week_day&#39;]]</span>
 
-<span class="n">train_dataset</span><span class="p">,</span> <span class="n">val_dataset</span><span class="p">,</span> <span class="n">test_dataset</span><span class="p">,</span> <span class="n">scaler_y</span> <span class="o">=</span> <span class="n">create_datasets</span><span class="p">(</span><span class="n">mc</span><span class="o">=</span><span class="n">mc</span><span class="p">,</span>
-                                                                     <span class="n">S_df</span><span class="o">=</span><span class="n">S_df</span><span class="p">,</span> <span class="n">Y_df</span><span class="o">=</span><span class="n">Y_df</span><span class="p">,</span> <span class="n">X_df</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span>
-                                                                     <span class="n">f_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Exogenous1&#39;</span><span class="p">,</span> <span class="s1">&#39;Exogenous2&#39;</span><span class="p">],</span>
-                                                                     <span class="n">ds_in_test</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                                                     <span class="n">ds_in_val</span><span class="o">=</span><span class="mi">728</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
-                                                                     <span class="n">n_uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_val_windows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-                                                                     <span class="n">is_val_random</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># train_dataset, val_dataset, test_dataset, scaler_y = create_datasets(mc=mc,</span>
+<span class="c1">#                                                                      S_df=S_df, Y_df=Y_df, X_df=X_df,</span>
+<span class="c1">#                                                                      f_cols=[&#39;Exogenous1&#39;, &#39;Exogenous2&#39;],</span>
+<span class="c1">#                                                                      ds_in_test=0,</span>
+<span class="c1">#                                                                      ds_in_val=728*24,</span>
+<span class="c1">#                                                                      n_uids=None, n_val_windows=None,freq=None, </span>
+<span class="c1">#                                                                      is_val_random=False)</span>
 
-<span class="n">train_loader</span> <span class="o">=</span> <span class="n">TimeSeriesLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
-                                <span class="n">batch_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]),</span>
-                                <span class="n">eq_batch_size</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># train_loader = TimeSeriesLoader(dataset=train_dataset,</span>
+<span class="c1">#                                 batch_size=int(mc[&#39;batch_size&#39;]),</span>
+<span class="c1">#                                 eq_batch_size=True,</span>
+<span class="c1">#                                 shuffle=True)</span>
 
-<span class="n">val_loader</span> <span class="o">=</span> <span class="n">TimeSeriesLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">val_dataset</span><span class="p">,</span>
-                              <span class="n">batch_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]),</span>
-                              <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># val_loader = TimeSeriesLoader(dataset=val_dataset,</span>
+<span class="c1">#                               batch_size=int(mc[&#39;batch_size&#39;]),</span>
+<span class="c1">#                               shuffle=False)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">Nbeats</span><span class="p">(</span><span class="n">input_size_multiplier</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">],</span>
-               <span class="n">output_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;output_size&#39;</span><span class="p">]),</span>
-               <span class="n">shared_weights</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;shared_weights&#39;</span><span class="p">],</span>
-               <span class="n">initialization</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;initialization&#39;</span><span class="p">],</span>
-               <span class="n">activation</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;activation&#39;</span><span class="p">],</span>
-               <span class="n">stack_types</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;stack_types&#39;</span><span class="p">],</span>
-               <span class="n">n_blocks</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_blocks&#39;</span><span class="p">],</span>
-               <span class="n">n_layers</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_layers&#39;</span><span class="p">],</span>
-               <span class="n">n_hidden</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_hidden&#39;</span><span class="p">],</span>
-               <span class="n">n_harmonics</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_harmonics&#39;</span><span class="p">]),</span>
-               <span class="n">n_polynomials</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_polynomials&#39;</span><span class="p">]),</span>
-               <span class="n">x_s_n_hidden</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;x_s_n_hidden&#39;</span><span class="p">]),</span>
-               <span class="n">exogenous_n_channels</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;exogenous_n_channels&#39;</span><span class="p">]),</span>
-               <span class="n">batch_normalization</span> <span class="o">=</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;batch_normalization&#39;</span><span class="p">],</span>
-               <span class="n">dropout_prob_theta</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;dropout_prob_theta&#39;</span><span class="p">],</span>
-               <span class="n">dropout_prob_exogenous</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;dropout_prob_exogenous&#39;</span><span class="p">],</span>
-               <span class="n">learning_rate</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]),</span>
-               <span class="n">lr_decay</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;lr_decay&#39;</span><span class="p">]),</span>
-               <span class="n">n_lr_decay_steps</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_lr_decay_steps&#39;</span><span class="p">]),</span>
-               <span class="n">weight_decay</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">],</span>
-               <span class="n">l1_theta</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;l1_theta&#39;</span><span class="p">],</span>
-               <span class="n">n_iterations</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;n_iterations&#39;</span><span class="p">]),</span>
-               <span class="n">early_stopping</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;early_stopping&#39;</span><span class="p">]),</span>
-               <span class="n">loss</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span>
-               <span class="n">loss_hypar</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;loss_hypar&#39;</span><span class="p">]),</span>
-               <span class="n">val_loss</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span>
-               <span class="n">frequency</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">],</span>
-               <span class="n">seasonality</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;seasonality&#39;</span><span class="p">]),</span>
-               <span class="n">random_seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;random_seed&#39;</span><span class="p">]))</span>
+<span class="c1"># model = Nbeats(input_size_multiplier=mc[&#39;input_size_multiplier&#39;],</span>
+<span class="c1">#                output_size=int(mc[&#39;output_size&#39;]),</span>
+<span class="c1">#                shared_weights=mc[&#39;shared_weights&#39;],</span>
+<span class="c1">#                initialization=mc[&#39;initialization&#39;],</span>
+<span class="c1">#                activation=mc[&#39;activation&#39;],</span>
+<span class="c1">#                stack_types=mc[&#39;stack_types&#39;],</span>
+<span class="c1">#                n_blocks=mc[&#39;n_blocks&#39;],</span>
+<span class="c1">#                n_layers=mc[&#39;n_layers&#39;],</span>
+<span class="c1">#                n_hidden=mc[&#39;n_hidden&#39;],</span>
+<span class="c1">#                n_harmonics=int(mc[&#39;n_harmonics&#39;]),</span>
+<span class="c1">#                n_polynomials=int(mc[&#39;n_polynomials&#39;]),</span>
+<span class="c1">#                x_s_n_hidden=int(mc[&#39;x_s_n_hidden&#39;]),</span>
+<span class="c1">#                exogenous_n_channels=int(mc[&#39;exogenous_n_channels&#39;]),</span>
+<span class="c1">#                batch_normalization = mc[&#39;batch_normalization&#39;],</span>
+<span class="c1">#                dropout_prob_theta=mc[&#39;dropout_prob_theta&#39;],</span>
+<span class="c1">#                dropout_prob_exogenous=mc[&#39;dropout_prob_exogenous&#39;],</span>
+<span class="c1">#                learning_rate=float(mc[&#39;learning_rate&#39;]),</span>
+<span class="c1">#                lr_decay=float(mc[&#39;lr_decay&#39;]),</span>
+<span class="c1">#                n_lr_decay_steps=float(mc[&#39;n_lr_decay_steps&#39;]),</span>
+<span class="c1">#                weight_decay=mc[&#39;weight_decay&#39;],</span>
+<span class="c1">#                l1_theta=mc[&#39;l1_theta&#39;],</span>
+<span class="c1">#                n_iterations=int(mc[&#39;n_iterations&#39;]),</span>
+<span class="c1">#                early_stopping=int(mc[&#39;early_stopping&#39;]),</span>
+<span class="c1">#                loss=mc[&#39;loss&#39;],</span>
+<span class="c1">#                loss_hypar=float(mc[&#39;loss_hypar&#39;]),</span>
+<span class="c1">#                val_loss=mc[&#39;val_loss&#39;],</span>
+<span class="c1">#                frequency=mc[&#39;frequency&#39;],</span>
+<span class="c1">#                seasonality=int(mc[&#39;seasonality&#39;]),</span>
+<span class="c1">#                random_seed=int(mc[&#39;random_seed&#39;]))</span>
 </pre></div>
 
     </div>
@@ -445,9 +443,8 @@ Outsample percentage=100.0, 	52416 time stamps
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_ts_loader</span><span class="o">=</span><span class="n">train_loader</span><span class="p">,</span> 
-          <span class="n">val_ts_loader</span><span class="o">=</span><span class="n">val_loader</span><span class="p">,</span>
-          <span class="n">eval_freq</span><span class="o">=</span><span class="n">mc</span><span class="p">[</span><span class="s1">&#39;eval_freq&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#           val_ts_loader=val_loader,</span>
+<span class="c1">#           eval_freq=mc[&#39;eval_freq&#39;])</span>
 </pre></div>
 
     </div>
@@ -490,47 +487,47 @@ Step: 20, Time: 3.614, Insample MAE: 3.90682, Outsample MAE: 4.36059
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Y_hat_df</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">Y_df</span><span class="o">=</span><span class="n">Y_df</span><span class="p">,</span> <span class="n">X_df</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">f_cols</span><span class="o">=</span><span class="p">[],</span> <span class="n">return_decomposition</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Y_hat_df = model.forecast(Y_df=Y_df, X_df=X_df, f_cols=[], return_decomposition=True)</span>
 
-<span class="c1"># if not (&#39;exogenous_wavenet&#39; in mc[&#39;stack_types&#39;]):</span>
-<span class="c1">#     Y_hat_file = f&#39;./results/{Y_df.unique_id[0]}_nbets_predictions.csv&#39;</span>
-<span class="c1"># else:</span>
-<span class="c1">#     Y_hat_file = f&#39;./results/{Y_df.unique_id[0]}_nbetsx_predictions.csv&#39;    </span>
-<span class="c1"># Y_hat_df.to_csv(Y_hat_file, index=False)</span>
+<span class="c1"># # if not (&#39;exogenous_wavenet&#39; in mc[&#39;stack_types&#39;]):</span>
+<span class="c1"># #     Y_hat_file = f&#39;./results/{Y_df.unique_id[0]}_nbets_predictions.csv&#39;</span>
+<span class="c1"># # else:</span>
+<span class="c1"># #     Y_hat_file = f&#39;./results/{Y_df.unique_id[0]}_nbetsx_predictions.csv&#39;    </span>
+<span class="c1"># # Y_hat_df.to_csv(Y_hat_file, index=False)</span>
 
-<span class="c1"># Filter and rename</span>
-<span class="n">Y_hat_df</span> <span class="o">=</span> <span class="n">Y_hat_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;y_hat&#39;</span><span class="p">:</span> <span class="s1">&#39;Forecast&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;Level&#39;</span><span class="p">,</span> 
-                                    <span class="s1">&#39;trend&#39;</span><span class="p">:</span> <span class="s1">&#39;Trend&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;seasonality&#39;</span><span class="p">:</span> <span class="s1">&#39;Seasonality&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;exogenous_wavenet&#39;</span><span class="p">:</span> <span class="s1">&#39;Exogenous&#39;</span><span class="p">,</span>
-                                    <span class="s1">&#39;residual&#39;</span><span class="p">:</span> <span class="s1">&#39;Residual&#39;</span><span class="p">})</span>
+<span class="c1"># # Filter and rename</span>
+<span class="c1"># Y_hat_df = Y_hat_df.rename(columns={&#39;y&#39;: &#39;True&#39;,</span>
+<span class="c1">#                                     &#39;y_hat&#39;: &#39;Forecast&#39;,</span>
+<span class="c1">#                                     &#39;level&#39;: &#39;Level&#39;, </span>
+<span class="c1">#                                     &#39;trend&#39;: &#39;Trend&#39;,</span>
+<span class="c1">#                                     &#39;seasonality&#39;: &#39;Seasonality&#39;,</span>
+<span class="c1">#                                     &#39;exogenous_wavenet&#39;: &#39;Exogenous&#39;,</span>
+<span class="c1">#                                     &#39;residual&#39;: &#39;Residual&#39;})</span>
 
-<span class="c1"># Format date stamp</span>
-<span class="k">if</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;output_size&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">24</span><span class="p">:</span>
-    <span class="n">Y_hat_df</span> <span class="o">=</span> <span class="n">Y_hat_df</span><span class="p">[(</span><span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span> <span class="o">&gt;=</span> <span class="s2">&quot;2017-12-18&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span> <span class="o">&lt;</span> <span class="s2">&quot;2017-12-19&quot;</span><span class="p">)]</span>
-    <span class="n">x_plot</span> <span class="o">=</span> <span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">values</span>
-    <span class="c1">#x_plot_min = str(Y_hat_df.ds.min())[:16]</span>
-    <span class="c1">#x_plot_max = str(Y_hat_df[&#39;ds&#39;].max())[:16]</span>
-    <span class="n">x_plot_min</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x_plot</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y, %R&#39;</span><span class="p">)</span>
-    <span class="n">x_plot_max</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x_plot</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%R&#39;</span><span class="p">)</span>
-    <span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">values</span>
+<span class="c1"># # Format date stamp</span>
+<span class="c1"># if mc[&#39;output_size&#39;]==24:</span>
+<span class="c1">#     Y_hat_df = Y_hat_df[(Y_hat_df.ds &gt;= &quot;2017-12-18&quot;) &amp; (Y_hat_df.ds &lt; &quot;2017-12-19&quot;)]</span>
+<span class="c1">#     x_plot = Y_hat_df.ds.values</span>
+<span class="c1">#     #x_plot_min = str(Y_hat_df.ds.min())[:16]</span>
+<span class="c1">#     #x_plot_max = str(Y_hat_df[&#39;ds&#39;].max())[:16]</span>
+<span class="c1">#     x_plot_min = pd.to_datetime(x_plot.min()).strftime(&#39;%B %d, %Y, %R&#39;)</span>
+<span class="c1">#     x_plot_max = pd.to_datetime(x_plot.max()).strftime(&#39;%R&#39;)</span>
+<span class="c1">#     Y_hat_df[&#39;ds&#39;] = Y_hat_df.ds.dt.hour.values</span>
 
-<span class="k">if</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;output_size&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">24</span><span class="p">:</span>
-    <span class="n">Y_hat_df</span> <span class="o">=</span> <span class="n">Y_hat_df</span><span class="p">[(</span><span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span> <span class="o">&gt;=</span> <span class="s2">&quot;2013-05-28&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span> <span class="o">&lt;</span> <span class="s2">&quot;2013-06-04&quot;</span><span class="p">)]</span>
-    <span class="n">x_plot</span> <span class="o">=</span> <span class="n">Y_hat_df</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">x_plot_min</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x_plot</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
-    <span class="n">x_plot_max</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x_plot</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span>
-    <span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">169</span><span class="p">)</span>
+<span class="c1"># if mc[&#39;output_size&#39;]&gt;24:</span>
+<span class="c1">#     Y_hat_df = Y_hat_df[(Y_hat_df.ds &gt;= &quot;2013-05-28&quot;) &amp; (Y_hat_df.ds &lt; &quot;2013-06-04&quot;)]</span>
+<span class="c1">#     x_plot = Y_hat_df.ds.values</span>
+<span class="c1">#     x_plot_min = pd.to_datetime(x_plot.min()).strftime(&#39;%B %d, %Y&#39;)</span>
+<span class="c1">#     x_plot_max = pd.to_datetime(x_plot.max()).strftime(&#39;%B %d, %Y&#39;)</span>
+<span class="c1">#     Y_hat_df[&#39;ds&#39;] = np.arange(1,169)</span>
     
-<span class="c1"># If not exogenous fill with nan (plot purposes)</span>
-<span class="k">if</span> <span class="s1">&#39;Exogenous&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Y_hat_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">exog</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Y_hat_df</span><span class="p">))</span>
-    <span class="n">exog</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;Exogenous&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exog</span>
+<span class="c1"># # If not exogenous fill with nan (plot purposes)</span>
+<span class="c1"># if &#39;Exogenous&#39; not in Y_hat_df.columns:</span>
+<span class="c1">#     exog = np.empty(len(Y_hat_df))</span>
+<span class="c1">#     exog[:] = np.nan</span>
+<span class="c1">#     Y_hat_df[&#39;Exogenous&#39;] = exog</span>
     
-<span class="n">Y_hat_df</span>
+<span class="c1"># Y_hat_df</span>
 </pre></div>
 
     </div>
@@ -727,81 +724,81 @@ Step: 20, Time: 3.614, Insample MAE: 3.90682, Outsample MAE: 4.36059
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x_axis_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hours [</span><span class="si">{</span><span class="n">x_plot_min</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">x_plot_max</span><span class="si">}</span><span class="s1">]&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x_axis_str</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># x_axis_str = f&#39;Hours [{x_plot_min} to {x_plot_max}]&#39;</span>
+<span class="c1"># print(x_axis_str)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">))</span>
-<span class="k">if</span> <span class="n">mc</span><span class="p">[</span><span class="s1">&#39;output_size&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">24</span><span class="p">:</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">))</span>
-<span class="n">ax0</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="c1">#ax3 = plt.subplot2grid((5,1),(3, 0), sharey=ax1)</span>
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="n">ax4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="c1"># ax2 = plt.subplot2grid((5,1),(2, 0))</span>
+<span class="c1"># fig = plt.figure(figsize=(16, 12.5))</span>
+<span class="c1"># if mc[&#39;output_size&#39;]==24: fig = plt.figure(figsize=(8, 12.5))</span>
+<span class="c1"># ax0 = plt.subplot2grid((5,1),(0, 0))</span>
+<span class="c1"># ax1 = plt.subplot2grid((5,1),(1, 0))</span>
+<span class="c1"># ax2 = plt.subplot2grid((5,1),(2, 0), sharey=ax1)</span>
+<span class="c1"># #ax3 = plt.subplot2grid((5,1),(3, 0), sharey=ax1)</span>
 <span class="c1"># ax3 = plt.subplot2grid((5,1),(3, 0))</span>
-<span class="c1"># ax4 = plt.subplot2grid((5,1),(4, 0))</span>
+<span class="c1"># ax4 = plt.subplot2grid((5,1),(4, 0), sharey=ax1)</span>
+<span class="c1"># # ax2 = plt.subplot2grid((5,1),(2, 0))</span>
+<span class="c1"># # ax3 = plt.subplot2grid((5,1),(3, 0))</span>
+<span class="c1"># # ax4 = plt.subplot2grid((5,1),(4, 0))</span>
 
-<span class="n">axs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">]</span>
+<span class="c1"># axs = [ax0, ax1, ax2, ax3, ax4]</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;#204457&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;Level&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;#628893&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;level&#39;</span><span class="p">,</span>
-            <span class="n">linestyle</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)))</span>
-<span class="c1">#axs[0].plot(Y_hat_df[&#39;ds&#39;], Y_hat_df[&#39;Forecast&#39;], c=&#39;peru&#39;, label=&#39;forecast&#39;, </span>
-<span class="c1">#            linestyle=&#39;dashdot&#39;)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Price[EUR/MWh]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">FONTSIZE</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">FONTSIZE</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+<span class="c1"># axs[0].plot(Y_hat_df[&#39;ds&#39;], Y_hat_df[&#39;True&#39;], c=&#39;#204457&#39;, label=&#39;true&#39;)</span>
+<span class="c1"># axs[0].plot(Y_hat_df[&#39;ds&#39;], Y_hat_df[&#39;Level&#39;], c=&#39;#628893&#39;, label=&#39;level&#39;,</span>
+<span class="c1">#             linestyle=(0,(5,10)))</span>
+<span class="c1"># #axs[0].plot(Y_hat_df[&#39;ds&#39;], Y_hat_df[&#39;Forecast&#39;], c=&#39;peru&#39;, label=&#39;forecast&#39;, </span>
+<span class="c1"># #            linestyle=&#39;dashdot&#39;)</span>
+<span class="c1"># axs[0].set_ylabel(&#39;Price[EUR/MWh]&#39;, fontsize=FONTSIZE)</span>
+<span class="c1"># axs[0].yaxis.set_tick_params(labelsize=FONTSIZE-4)</span>
+<span class="c1"># axs[0].set_xticklabels([])</span>
 
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;Trend&#39;</span><span class="p">,</span> <span class="s1">&#39;Seasonality&#39;</span><span class="p">,</span> <span class="s1">&#39;Exogenous&#39;</span><span class="p">,</span> <span class="s1">&#39;Residual&#39;</span><span class="p">]):</span>
-    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y_hat_df</span><span class="p">[</span><span class="s1">&#39;ds&#39;</span><span class="p">],</span> <span class="n">Y_hat_df</span><span class="p">[</span><span class="n">comp</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;#628893&#39;</span><span class="p">)</span>
-    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">FONTSIZE</span><span class="p">)</span>
-    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">FONTSIZE</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">FONTSIZE</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">172</span><span class="p">)</span>
+<span class="c1"># for i, comp in enumerate([&#39;Trend&#39;, &#39;Seasonality&#39;, &#39;Exogenous&#39;, &#39;Residual&#39;]):</span>
+<span class="c1">#     axs[i+1].plot(Y_hat_df[&#39;ds&#39;], Y_hat_df[comp], c=&#39;#628893&#39;)</span>
+<span class="c1">#     axs[i+1].set_ylabel(comp, fontsize=FONTSIZE)</span>
+<span class="c1">#     axs[i+1].yaxis.set_tick_params(labelsize=FONTSIZE-3)</span>
+<span class="c1">#     axs[i+1].xaxis.set_tick_params(labelsize=FONTSIZE-3)</span>
+<span class="c1">#     axs[i+1].set_xlim(-4, 172)</span>
         
-    <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">:</span>
-        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+<span class="c1">#     if i&lt;3:</span>
+<span class="c1">#         axs[i+1].set_xticklabels([])</span>
 
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Y_hat_df</span><span class="p">[</span><span class="n">comp</span><span class="p">]))</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">Y_hat_df</span><span class="p">[</span><span class="n">comp</span><span class="p">]):</span>
-        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#     if np.sum(np.isnan(Y_hat_df[comp]))==len(Y_hat_df[comp]):</span>
+<span class="c1">#         axs[i+1].set_visible(False)</span>
         
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">9.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="c1">#     if not (i == 2):</span>
+<span class="c1">#         axs[i+1].set_ylim(-9.5, 6)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
-        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="c1">#     if not (i == 3):</span>
+<span class="c1">#         axs[i+1].set_ylim(-12, 6)</span>
         
-<span class="c1">#     # Trend</span>
-<span class="c1">#     if i==0:</span>
-<span class="c1">#         #axs[i+1].set_ylim(-1, 4)</span>
-<span class="c1">#         axs[i+1].set_ylim(-0.5, 1)</span>
+<span class="c1"># #     # Trend</span>
+<span class="c1"># #     if i==0:</span>
+<span class="c1"># #         #axs[i+1].set_ylim(-1, 4)</span>
+<span class="c1"># #         axs[i+1].set_ylim(-0.5, 1)</span>
     
-<span class="c1">#     # Seasonality</span>
-<span class="c1">#     if i==1:</span>
-<span class="c1">#         #axs[i+1].set_ylim(-4, 7)</span>
-<span class="c1">#         axs[i+1].set_ylim(-12, 7)</span>
+<span class="c1"># #     # Seasonality</span>
+<span class="c1"># #     if i==1:</span>
+<span class="c1"># #         #axs[i+1].set_ylim(-4, 7)</span>
+<span class="c1"># #         axs[i+1].set_ylim(-12, 7)</span>
     
-<span class="c1">#     # Exogenous</span>
-<span class="c1">#     if i==2:</span>
-<span class="c1">#         #axs[i+1].set_ylim(-6, 25)</span>
-<span class="c1">#         axs[i+1].set_ylim(-12, 7)</span>
+<span class="c1"># #     # Exogenous</span>
+<span class="c1"># #     if i==2:</span>
+<span class="c1"># #         #axs[i+1].set_ylim(-6, 25)</span>
+<span class="c1"># #         axs[i+1].set_ylim(-12, 7)</span>
             
-<span class="c1">#     # Residual</span>
-<span class="c1">#     if i==3:</span>
-<span class="c1">#         #axs[i+1].set_ylim(-6, 25)</span>
-<span class="c1">#         axs[i+1].set_ylim(-7, 7)</span>
+<span class="c1"># #     # Residual</span>
+<span class="c1"># #     if i==3:</span>
+<span class="c1"># #         #axs[i+1].set_ylim(-6, 25)</span>
+<span class="c1"># #         axs[i+1].set_ylim(-7, 7)</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">FONTSIZE</span><span class="o">-</span><span class="mi">3</span><span class="p">})</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_axis_str</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">FONTSIZE</span><span class="p">)</span>
-<span class="c1"># axs[4].set_xticks(range(1,169))</span>
+<span class="c1"># axs[0].legend(prop={&#39;size&#39;: FONTSIZE-3})</span>
+<span class="c1"># axs[4].set_xlabel(x_axis_str, fontsize=FONTSIZE)</span>
+<span class="c1"># # axs[4].set_xticks(range(1,169))</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.125</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> 
-                    <span class="n">top</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./results/variance_decomposition.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># plt.tight_layout()</span>
+<span class="c1"># plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, </span>
+<span class="c1">#                     top=1.2, wspace=0.2, hspace=0.2)</span>
+<span class="c1"># plt.savefig(&#39;./results/variance_decomposition.pdf&#39;, bbox_inches = &#39;tight&#39;)</span>
+<span class="c1"># plt.show()</span>
 </pre></div>
 
     </div>

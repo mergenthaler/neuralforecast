@@ -28,7 +28,7 @@ from ..data.tsdataset import TimeSeriesDataset
 from ..data.tsloader import TimeSeriesLoader
 from ..models.esrnn.esrnn import ESRNN
 from ..models.esrnn.mqesrnn import MQESRNN
-from ..models.nbeats.nbeats import Nbeats
+from ..models.nbeats.nbeats_model import NBEATS
 
 # Cell
 def get_mask_dfs(Y_df, ds_in_val, ds_in_test):
@@ -218,27 +218,27 @@ def instantiate_loaders(mc, train_dataset, val_dataset, test_dataset):
 # Cell
 def instantiate_nbeats(mc):
     mc['n_hidden_list'] = len(mc['stack_types']) * [ mc['n_layers'][0]*[int(mc['n_hidden'])] ]
-    model = Nbeats(input_size_multiplier=mc['input_size_multiplier'],
-                   output_size=int(mc['output_size']),
+    model = NBEATS(n_time_in=int(mc['input_size_multiplier'] * mc['output_size']),
+                   n_time_out=int(mc['output_size']),
+                   n_x=int(mc['n_x']),
+                   n_s=int(mc['n_s']),
+                   n_s_hidden=int(mc['x_s_n_hidden']),
+                   n_x_hidden=int(mc['exogenous_n_channels']),
                    shared_weights=mc['shared_weights'],
                    initialization=mc['initialization'],
                    activation=mc['activation'],
                    stack_types=mc['stack_types'],
                    n_blocks=mc['n_blocks'],
                    n_layers=mc['n_layers'],
-                   n_hidden=mc['n_hidden_list'],
+                   n_theta_hidden=mc['n_hidden_list'],
                    n_harmonics=int(mc['n_harmonics']),
                    n_polynomials=int(mc['n_polynomials']),
-                   x_s_n_hidden=int(mc['x_s_n_hidden']),
-                   exogenous_n_channels=int(mc['exogenous_n_channels']),
                    batch_normalization = mc['batch_normalization'],
                    dropout_prob_theta=mc['dropout_prob_theta'],
-                   dropout_prob_exogenous=mc['dropout_prob_exogenous'],
                    learning_rate=float(mc['learning_rate']),
                    lr_decay=float(mc['lr_decay']),
                    n_lr_decay_steps=float(mc['n_lr_decay_steps']),
                    weight_decay=mc['weight_decay'],
-                   l1_theta=mc['l1_theta'],
                    n_iterations=int(mc['n_iterations']),
                    early_stopping=int(mc['early_stopping']),
                    loss=mc['loss'],
@@ -246,8 +246,7 @@ def instantiate_nbeats(mc):
                    val_loss=mc['val_loss'],
                    frequency=mc['frequency'],
                    seasonality=int(mc['seasonality']),
-                   random_seed=int(mc['random_seed']),
-                   device=mc['device'])
+                   random_seed=int(mc['random_seed']))
     return model
 
 # Cell
@@ -340,6 +339,7 @@ def model_fit_predict(mc, S_df, Y_df, X_df, f_cols,
                                                                          n_uids=n_uids,
                                                                          n_val_windows=n_val_windows,
                                                                          freq=freq, is_val_random=is_val_random)
+    mc['n_x'], mc['n_s'] = train_dataset.get_n_variables()
 
     #------------------------------------------- Instantiate & fit -------------------------------------------#
     train_loader, val_loader, test_loader = instantiate_loaders(mc=mc,

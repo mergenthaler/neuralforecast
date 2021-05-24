@@ -1,7 +1,7 @@
 {
   "nixtla": {
     "Overview": "/",
-    "Title": "models_nbeats__nbeats_model.html",
+    "Title": "models_esrnn__esrnn_model.html",
     "TimeSeriesLoader": "data__tsloader.html",
     "EPF dataset": "data_datasets__epf.html",
     "GEFCom2012": "data_datasets__gefcom2012.html",
@@ -19,6 +19,7 @@
     "ES-RNN: Exponential Smoothing Recurrent Neural Network": "models_esrnn__esrnn.html",
     "MQESRNN model": "models_esrnn__mqesrnn.html",
     "Naive Benchmark Model": "models_naive2__naive2.html",
-    "N-BEATS: Neural Basis Expansion Analysis": "models_nbeats__nbeats.html"
+    "N-BEATS: Neural Basis Expansion Analysis": "models_nbeats__nbeats.html",
+    "N-BEATS model wrapper": "models_nbeats__nbeats_model.html"
   }
 }
