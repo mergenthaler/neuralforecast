@@ -476,6 +476,7 @@ from copy import deepcopy
 from collections import defaultdict
 
 from torch import optim
+import pytorch_lightning as pl
 
 from ...losses.pytorch import (
     MAPELoss, MASELoss, SMAPELoss,
@@ -489,7 +490,7 @@ from ...losses.numpy import (
 from ...data.tsdataset import TimeSeriesDataset
 
 # Cell
-class NBEATS(object):
+class NBEATS(pl.LightningModule):
     def __init__(self,
                  n_time_in,
                  n_time_out,
@@ -513,24 +514,23 @@ class NBEATS(object):
                  n_lr_decay_steps,
                  weight_decay,
                  n_iterations,
-                 early_stopping,
-                 loss,
+                 tr_loss,
                  loss_hypar,
                  val_loss,
                  frequency,
                  random_seed,
-                 seasonality,
-                 device=None):
+                 seasonality):
         super(NBEATS, self).__init__()
         """
         N-BEATS model.
 
         Parameters
         ----------
-        input_size_multiplier: int
+        # TODO: Fix parameters' documentation.
+        n_time_in: int
             Multiplier to get insample size.
-            Insample size = input_size_multiplier * output_size
-        output_size: int
+            Insample size = n_time_in * output_size
+        n_time_out: int
             Forecast horizon.
         shared_weights: bool
             If True, repeats first block.
@@ -581,9 +581,7 @@ class NBEATS(object):
             L2 penalty for optimizer.
         n_iterations: int
             Number of training steps.
-        early_stopping: int
-            Early stopping interations.
-        loss: str
+        tr_loss: str
             Loss to optimize.
             An item from ['MAPE', 'MASE', 'SMAPE', 'MSE', 'MAE', 'PINBALL', 'PINBALL2'].
         loss_hypar:
@@ -599,9 +597,6 @@ class NBEATS(object):
         seasonality: int
             Time series seasonality.
             Usually 7 for daily data, 12 for monthly data and 4 for weekly data.
-        device: Optional[str]
-            If None checks 'cuda' availability.
-            An item from ['cuda', 'cpu'].
         """
 
         if activation == 'selu': initialization = 'lecun_normal'
@@ -624,6 +619,13 @@ class NBEATS(object):
         self.n_polynomials = n_polynomials
         self.n_theta_hidden = n_theta_hidden
 
+        # Loss functions
+        self.tr_loss = tr_loss
+        self.loss_hypar = loss_hypar
+        self.val_loss = val_loss
+        self.tr_loss_fn = self.__loss_fn(self.tr_loss)
+        self.validation_loss_fn = self.__val_loss_fn(self.val_loss) #Uses numpy losses
+
         # Regularization and optimization parameters
         self.batch_normalization = batch_normalization
         self.dropout_prob_theta = dropout_prob_theta
@@ -632,45 +634,115 @@ class NBEATS(object):
         self.n_lr_decay_steps = n_lr_decay_steps
         self.weight_decay = weight_decay
         self.n_iterations = n_iterations
-        self.early_stopping = early_stopping
-        self.loss = loss
-        self.loss_hypar = loss_hypar
-        self.val_loss = val_loss
+        self.lr_decay_steps = self.n_iterations // self.n_lr_decay_steps
+        self.lr_decay_steps = 1 if self.lr_decay_steps == 0 else self.lr_decay_steps
         self.random_seed = random_seed
 
         # Data parameters
         self.frequency = frequency
         self.seasonality = seasonality
-        #self.scaler = scaler
+        self.return_decomposition = False
 
-        if device is None:
-            device = 'cuda' if t.cuda.is_available() else 'cpu'
-        self.device = device
+        self.model = _NBEATS(n_time_in=self.n_time_in,
+                             n_time_out=self.n_time_out,
+                             n_s=self.n_s,
+                             n_x=self.n_x,
+                             n_s_hidden=self.n_s_hidden,
+                             n_x_hidden=self.n_x_hidden,
+                             n_polynomials=self.n_polynomials,
+                             n_harmonics=self.n_harmonics,
+                             stack_types=self.stack_types,
+                             n_blocks=self.n_blocks,
+                             n_layers=self.n_layers,
+                             n_theta_hidden=self.n_theta_hidden,
+                             dropout_prob_theta=self.dropout_prob_theta,
+                             activation=self.activation,
+                             initialization=self.initialization,
+                             batch_normalization=self.batch_normalization,
+                             shared_weights=self.shared_weights)
 
-        self.model = _NBEATS(n_time_in=n_time_in,
-                             n_time_out=n_time_out,
-                             n_s=n_s,
-                             n_x=n_x,
-                             n_s_hidden=n_s_hidden,
-                             n_x_hidden=n_x_hidden,
-                             n_polynomials=n_polynomials,
-                             n_harmonics=n_harmonics,
-                             stack_types=stack_types,
-                             n_blocks=n_blocks,
-                             n_layers=n_layers,
-                             n_theta_hidden=n_theta_hidden,
-                             dropout_prob_theta=dropout_prob_theta,
-                             activation=activation,
-                             initialization=initialization,
-                             batch_normalization=batch_normalization,
-                             shared_weights=shared_weights).to(self.device)
+    def training_step(self, batch, batch_idx):
+        S = batch['S']
+        Y = batch['Y']
+        X = batch['X']
+
+        available_mask  = batch['available_mask']
+        outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
+
+        outsample_y, forecast = self.model(S=S, Y=Y, X=X,
+                                            insample_mask=available_mask,
+                                            return_decomposition=False)
+
+        loss = self.tr_loss_fn(x=Y, # TODO: eliminate only useful for MASE
+                               loss_hypar=self.loss_hypar,
+                               forecast=forecast,
+                               target=outsample_y,
+                               mask=outsample_mask)
+
+        self.log('train_loss', loss, prog_bar=True, on_epoch=True)
+
+        return loss
+
+    def validation_step(self, batch, idx):
+        S = batch['S']
+        Y = batch['Y']
+        X = batch['X']
+
+        available_mask  = batch['available_mask']
+        outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
+
+        outsample_y, forecast = self.model(S=S, Y=Y, X=X,
+                                           insample_mask=available_mask,
+                                           return_decomposition=False)
+
+        loss = self.validation_loss_fn(target=outsample_y, forecast=forecast,
+                                       weights=outsample_mask)
+
+        self.log('val_loss', loss,  prog_bar=True)
+
+        return loss
+
+    def on_fit_start(self):
+        t.manual_seed(self.random_seed)
+        np.random.seed(self.random_seed)
+        random.seed(self.random_seed) #TODO: interaccion rara con window_sampling de validacion
+
+    def forward(self, batch):
+        S = batch['S']
+        Y = batch['Y']
+        X = batch['X']
+        available_mask  = batch['available_mask']
+        outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
+
+        if self.return_decomposition:
+            outsample_y, forecast, block_forecast = self.model(S=S, Y=Y, X=X,
+                                                               insample_mask=available_mask,
+                                                               return_decomposition=True)
+            return outsample_y, forecast, block_forecast
+
+        outsample_y, forecast = self.model(S=S, Y=Y, X=X,
+                                           insample_mask=available_mask,
+                                           return_decomposition=False)
+        return outsample_y, forecast
+
+    def configure_optimizers(self):
+        optimizer = optim.Adam(self.model.parameters(),
+                               lr=self.learning_rate,
+                               weight_decay=self.weight_decay)
+
+        lr_scheduler = optim.lr_scheduler.StepLR(optimizer,
+                                                 step_size=self.lr_decay_steps,
+                                                 gamma=self.lr_decay)
+
+        return {'optimizer': optimizer, 'lr_scheduler': lr_scheduler}
 
     def __loss_fn(self, loss_name: str):
         def loss(x, loss_hypar, forecast, target, mask):
             if loss_name == 'MAPE':
                 return MAPELoss(y=target, y_hat=forecast, mask=mask)
             elif loss_name == 'MASE':
-                return MASELoss(y=target, y_hat=forecast, y_insample=x, seasonality=loss_hypar, mask=mask)
+                return MASELoss(y=target, y_hat=forecast, y_insample=x,
+                                seasonality=loss_hypar, mask=mask)
             elif loss_name == 'SMAPE':
                 return SMAPELoss(y=target, y_hat=forecast, mask=mask)
             elif loss_name == 'MSE':
@@ -683,9 +755,13 @@ class NBEATS(object):
                 raise Exception(f'Unknown loss function: {loss_name}')
         return loss
 
-    def __val_loss_fn(self, loss_name='MAE'):
+    def __val_loss_fn(self, loss_name: str):
         #TODO: mase not implemented
         def loss(forecast, target, weights):
+            forecast = forecast.detach().numpy()
+            target = target.detach().numpy()
+            weights = weights.detach().numpy()
+
             if loss_name == 'MAPE':
                 return mape(y=target, y_hat=forecast, weights=weights)
             elif loss_name == 'SMAPE':
@@ -701,267 +777,3 @@ class NBEATS(object):
             else:
                 raise Exception(f'Unknown loss function: {loss_name}')
         return loss
-
-    def to_tensor(self, x: np.ndarray) -> t.Tensor:
-        tensor = t.as_tensor(x, dtype=t.float32).to(self.device)
-        return tensor
-
-    def fit(self, train_ts_loader, val_ts_loader=None, n_iterations=None, verbose=True, eval_freq=1):
-        # TODO: Indexes hardcoded, information duplicated in train and val datasets
-        assert (self.n_time_in)==train_ts_loader.dataset.input_size, \
-            f'model input_size {self.n_time_in} data input_size {train_ts_loader.dataset.input_size}'
-
-        # Random Seeds (model initialization)
-        t.manual_seed(self.random_seed)
-        np.random.seed(self.random_seed)
-        random.seed(self.random_seed) #TODO: interaccion rara con window_sampling de validacion
-
-        # Overwrite n_iterations and train datasets
-        if n_iterations is None:
-            n_iterations = self.n_iterations
-
-        lr_decay_steps = n_iterations // self.n_lr_decay_steps
-        if lr_decay_steps == 0:
-            lr_decay_steps = 1
-
-        optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
-        lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=lr_decay_steps, gamma=self.lr_decay)
-        training_loss_fn = self.__loss_fn(self.loss)
-        validation_loss_fn = self.__val_loss_fn(self.val_loss) #Uses numpy losses
-
-        if verbose:
-            print('\n')
-            print('='*30+' Start fitting '+'='*30)
-
-        #self.loss_dict = {} # Restart self.loss_dict
-        start = time.time()
-        self.trajectories = {'iteration':[],'train_loss':[], 'val_loss':[]}
-        self.final_insample_loss = None
-        self.final_outsample_loss = None
-
-        # Training Loop
-        early_stopping_counter = 0
-        best_val_loss = np.inf
-        best_insample_loss = np.inf
-        best_state_dict = deepcopy(self.model.state_dict())
-        break_flag = False
-        iteration = 0
-        epoch = 0
-        while (iteration < n_iterations) and (not break_flag):
-            epoch +=1
-            for batch in iter(train_ts_loader):
-                iteration += 1
-                if (iteration > n_iterations) or (break_flag):
-                    continue
-
-                self.model.train()
-                # Parse batch
-                S     = self.to_tensor(batch['S'])
-                Y     = self.to_tensor(batch['Y'])
-                X     = self.to_tensor(batch['X'])
-                available_mask  = self.to_tensor(batch['available_mask'])
-                outsample_mask = self.to_tensor(batch['sample_mask'])[:, -self.n_time_out:]
-
-                optimizer.zero_grad()
-                outsample_y, forecast = self.model(S=S, Y=Y, X=X,
-                                                   insample_mask=available_mask,
-                                                   return_decomposition=False)
-
-                training_loss = training_loss_fn(x=Y, # TODO: eliminate only useful for MASE
-                                                 loss_hypar=self.loss_hypar,
-                                                 forecast=forecast,
-                                                 target=outsample_y,
-                                                 mask=outsample_mask)
-
-                # Protection to exploding gradients
-                if not np.isnan(float(training_loss)):
-                    training_loss.backward()
-                    t.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
-                    optimizer.step()
-                else:
-                    early_stopping_counter = self.early_stopping
-
-                lr_scheduler.step()
-                if (iteration % eval_freq == 0):
-                    display_string = 'Step: {}, Time: {:03.3f}, Insample {}: {:.5f}'.format(iteration,
-                                                                                            time.time()-start,
-                                                                                            self.loss,
-                                                                                            training_loss.cpu().data.numpy())
-                    self.trajectories['iteration'].append(iteration)
-                    self.trajectories['train_loss'].append(float(training_loss.cpu().data.numpy()))
-
-                    if val_ts_loader is not None:
-                        loss = self.evaluate_performance(ts_loader=val_ts_loader,
-                                                         validation_loss_fn=validation_loss_fn)
-                        display_string += ", Outsample {}: {:.5f}".format(self.val_loss, loss)
-                        self.trajectories['val_loss'].append(loss)
-
-                        if self.early_stopping:
-                            if loss < best_val_loss:
-                                # Save current model if improves outsample loss
-                                best_state_dict = deepcopy(self.model.state_dict())
-                                best_insample_loss = training_loss.cpu().data.numpy()
-                                early_stopping_counter = 0
-                                best_val_loss = loss
-                            else:
-                                early_stopping_counter += 1
-                            if early_stopping_counter >= self.early_stopping:
-                                break_flag = True
-
-                    print(display_string)
-
-                if break_flag:
-                    print('\n')
-                    print(19*'-',' Stopped training by early stopping', 19*'-')
-                    self.model.load_state_dict(best_state_dict)
-                    break
-
-        #End of fitting
-        if n_iterations > 0:
-            # This is batch loss!
-            self.final_insample_loss = float(training_loss.cpu().data.numpy()) if not break_flag else best_insample_loss
-            string = 'Step: {}, Time: {:03.3f}, Insample {}: {:.5f}'.format(iteration,
-                                                                            time.time()-start,
-                                                                            self.loss,
-                                                                            self.final_insample_loss)
-            if val_ts_loader is not None:
-                self.final_outsample_loss = self.evaluate_performance(ts_loader=val_ts_loader,
-                                                                      validation_loss_fn=validation_loss_fn)
-                string += ", Outsample {}: {:.5f}".format(self.val_loss, self.final_outsample_loss)
-            print(string)
-            print('='*30+'  End fitting  '+'='*30)
-            print('\n')
-
-    def predict(self, ts_loader, return_decomposition=False):
-        self.model.eval()
-        assert not ts_loader.shuffle, 'ts_loader must have shuffle as False.'
-
-        forecasts = []
-        block_forecasts = []
-        outsample_ys = []
-        outsample_masks = []
-        with t.no_grad():
-            for batch in iter(ts_loader):
-
-                # Parse batch
-                S     = self.to_tensor(batch['S'])
-                Y     = self.to_tensor(batch['Y'])
-                X     = self.to_tensor(batch['X'])
-                available_mask  = self.to_tensor(batch['available_mask'])
-                outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
-
-                outsample_y, forecast, block_forecast = self.model(S=S, Y=Y, X=X,
-                                                                   insample_mask=available_mask,
-                                                                   return_decomposition=True)
-                outsample_ys.append(outsample_y.cpu().data.numpy())
-                forecasts.append(forecast.cpu().data.numpy())
-                block_forecasts.append(block_forecast.cpu().data.numpy())
-                outsample_masks.append(outsample_mask)
-
-        forecasts = np.vstack(forecasts)
-        block_forecasts = np.vstack(block_forecasts)
-        outsample_ys = np.vstack(outsample_ys)
-        outsample_masks = np.vstack(outsample_masks)
-
-        n_series = ts_loader.dataset.n_series
-        _, n_components, _ = block_forecast.size() #(n_windows, n_components, output_size)
-        n_fcds = len(outsample_ys) // n_series
-        outsample_ys = outsample_ys.reshape(n_series, n_fcds, self.n_time_out)
-        forecasts = forecasts.reshape(n_series, n_fcds, self.n_time_out)
-        outsample_masks = outsample_masks.reshape(n_series, n_fcds, self.n_time_out)
-        block_forecasts = block_forecasts.reshape(n_series, n_fcds, n_components, self.n_time_out)
-
-        self.model.train()
-        if return_decomposition:
-            return outsample_ys, forecasts, block_forecasts, outsample_masks
-        else:
-            return outsample_ys, forecasts, outsample_masks
-
-    def forecast(self, mc, S_df, Y_df, X_df, f_cols, return_decomposition):
-        # TODO: protect available_mask from nans
-        mc['idx_to_sample_freq'] = self.n_time_out
-
-        # Last output_size mask for predictions
-        mask_df = Y_df.copy()
-        mask_df = mask_df[['unique_id', 'ds']]
-        sample_mask = np.ones(len(mask_df))
-        mask_df['sample_mask'] = np.ones(len(mask_df))
-        mask_df['available_mask'] = np.ones(len(mask_df))
-
-        #------------------------------------------- Instantiate loader -------------------------------------------#
-
-        dataset, _, _, scaler_y = create_datasets(mc=mc, S_df=S_df, Y_df=Y_df, X_df=X_df, f_cols=f_cols,
-                                                        ds_in_test=0,ds_in_val=0,
-                                                        n_uids=None, n_val_windows=None,
-                                                        freq=self.n_time_out,
-                                                        is_val_random=False)
-
-        ts_loader = TimeSeriesLoader(dataset=dataset,
-                                     batch_size=1024,
-                                     shuffle=False)
-
-        # Model prediction
-        if return_decomposition:
-            y_true, y_hat, y_hat_dec, _ = self.predict(ts_loader=ts_loader,
-                                                       return_decomposition=True)
-
-            # Reshaping model outputs
-            # n_uids, n_fcds, n_comps, n_ltsp -> n_asins, n_fcds, n_ltsp, n_comps
-            n_asins, n_fcds, n_comps, n_ltsp = y_hat_dec.shape
-            y_hat_dec = np.transpose(y_hat_dec, (0, 1, 3, 2))
-            y_hat_dec = y_hat_dec.reshape(-1, n_comps)
-
-            Y_hat_dec_df = pd.DataFrame(data=y_hat_dec,
-                                        columns=['level']+self.stack_types)
-
-        else:
-            y_true, y_hat, _ = self.predict(ts_loader=ts_loader,
-                                            return_decomposition=False)
-
-        # Reshaping model outputs
-        y_true = y_true.reshape(-1)
-        y_hat  = y_hat.reshape(-1)
-        Y_hat_df = pd.DataFrame({'unique_id': Y_df.unique_id.values[self.n_time_in:],
-                                 'ds': Y_df.ds.values[self.n_time_in:],
-                                 'y': Y_df.y.values[self.n_time_in:],
-                                 'y_hat': y_hat})
-        if return_decomposition:
-            Y_hat_df = pd.concat([Y_hat_df, Y_hat_dec_df], axis=1)
-        Y_hat_df['residual'] = Y_hat_df['y'] - Y_hat_df['y_hat']
-        return Y_hat_df
-
-    def evaluate_performance(self, ts_loader, validation_loss_fn):
-        self.model.eval()
-
-        target, forecast, outsample_mask = self.predict(ts_loader=ts_loader,
-                                                        return_decomposition=False)
-
-        complete_loss = validation_loss_fn(target=target, forecast=forecast, weights=outsample_mask)
-
-        self.model.train()
-        return complete_loss
-
-    def save(self, model_dir, model_id, state_dict = None):
-
-        if not os.path.exists(model_dir):
-            os.makedirs(model_dir)
-
-        if state_dict is None:
-            state_dict = self.model.state_dict()
-
-        model_file = os.path.join(model_dir, f"model_{model_id}.model")
-        print('Saving model to:\n {}'.format(model_file)+'\n')
-        t.save({'model_state_dict': state_dict}, model_file)
-
-    def load(self, model_dir, model_id):
-
-        model_file = os.path.join(model_dir, f"model_{model_id}.model")
-        path = Path(model_file)
-
-        assert path.is_file(), 'No model_*.model file found in this path!'
-
-        print('Loading model from:\n {}'.format(model_file)+'\n')
-
-        checkpoint = t.load(model_file, map_location=self.device)
-        self.model.load_state_dict(checkpoint['model_state_dict'])
-        self.model.to(self.device)
