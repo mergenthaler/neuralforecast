@@ -406,6 +406,7 @@ class _NBEATS(nn.Module):
         insample_y    = Y[:, :-self.n_time_out]
         insample_x_t  = X[:, :, :-self.n_time_out]
         insample_mask = insample_mask[:, :-self.n_time_out]
+        outsample_mask = insample_mask[:, -self.n_time_out:]
 
         # outsample
         outsample_y   = Y[:, -self.n_time_out:]
@@ -417,7 +418,7 @@ class _NBEATS(nn.Module):
                                                                     insample_mask=insample_mask,
                                                                     outsample_x_t=outsample_x_t,
                                                                     x_s=S)
-            return outsample_y, forecast, block_forecasts
+            return outsample_y, forecast, block_forecasts, outsample_mask
 
         else:
             forecast = self.forecast(insample_y=insample_y,
@@ -425,7 +426,7 @@ class _NBEATS(nn.Module):
                                      insample_mask=insample_mask,
                                      outsample_x_t=outsample_x_t,
                                      x_s=S)
-            return outsample_y, forecast
+            return outsample_y, forecast, outsample_mask
 
     def forecast(self, insample_y: t.Tensor, insample_x_t: t.Tensor, insample_mask: t.Tensor,
                  outsample_x_t: t.Tensor, x_s: t.Tensor):
@@ -511,12 +512,11 @@ class NBEATS(pl.LightningModule):
                  dropout_prob_theta,
                  learning_rate,
                  lr_decay,
-                 n_lr_decay_steps,
+                 lr_decay_step_size,
                  weight_decay,
-                 n_iterations,
-                 tr_loss,
+                 loss_train,
                  loss_hypar,
-                 val_loss,
+                 loss_valid,
                  frequency,
                  random_seed,
                  seasonality):
@@ -575,18 +575,16 @@ class NBEATS(pl.LightningModule):
             Learning rate between (0, 1).
         lr_decay: float
             Decreasing multiplier for the learning rate.
-        n_lr_decay_steps: int
-            Period for each lerning rate decay.
+        lr_decay_step_size: int
+            Steps between each lerning rate decay.
         weight_decay: float
             L2 penalty for optimizer.
-        n_iterations: int
-            Number of training steps.
-        tr_loss: str
+        loss_train: str
             Loss to optimize.
             An item from ['MAPE', 'MASE', 'SMAPE', 'MSE', 'MAE', 'PINBALL', 'PINBALL2'].
         loss_hypar:
             Hyperparameter for chosen loss.
-        val_loss:
+        loss_valid:
             Validation loss.
             An item from ['MAPE', 'MASE', 'SMAPE', 'RMSE', 'MAE', 'PINBALL'].
         frequency: str
@@ -620,22 +618,19 @@ class NBEATS(pl.LightningModule):
         self.n_theta_hidden = n_theta_hidden
 
         # Loss functions
-        self.tr_loss = tr_loss
+        self.loss_train = loss_train
         self.loss_hypar = loss_hypar
-        self.val_loss = val_loss
-        self.tr_loss_fn = self.__loss_fn(self.tr_loss)
-        self.validation_loss_fn = self.__val_loss_fn(self.val_loss) #Uses numpy losses
+        self.loss_valid = loss_valid
+        self.loss_fn_train = self.__loss_fn(self.loss_train)
+        self.loss_fn_valid = self.__val_loss_fn(self.loss_valid) #Uses numpy losses
 
         # Regularization and optimization parameters
         self.batch_normalization = batch_normalization
         self.dropout_prob_theta = dropout_prob_theta
         self.learning_rate = learning_rate
         self.lr_decay = lr_decay
-        self.n_lr_decay_steps = n_lr_decay_steps
         self.weight_decay = weight_decay
-        self.n_iterations = n_iterations
-        self.lr_decay_steps = self.n_iterations // self.n_lr_decay_steps
-        self.lr_decay_steps = 1 if self.lr_decay_steps == 0 else self.lr_decay_steps
+        self.lr_decay_step_size = lr_decay_step_size
         self.random_seed = random_seed
 
         # Data parameters
@@ -665,19 +660,17 @@ class NBEATS(pl.LightningModule):
         S = batch['S']
         Y = batch['Y']
         X = batch['X']
+        available_mask = batch['available_mask']
 
-        available_mask  = batch['available_mask']
-        outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
+        outsample_y, forecast, outsample_mask = self.model(S=S, Y=Y, X=X,
+                                                           insample_mask=available_mask,
+                                                           return_decomposition=False)
 
-        outsample_y, forecast = self.model(S=S, Y=Y, X=X,
-                                            insample_mask=available_mask,
-                                            return_decomposition=False)
-
-        loss = self.tr_loss_fn(x=Y, # TODO: eliminate only useful for MASE
-                               loss_hypar=self.loss_hypar,
-                               forecast=forecast,
-                               target=outsample_y,
-                               mask=outsample_mask)
+        loss = self.loss_fn_train(x=Y, # TODO: eliminate only useful for MASE
+                                  loss_hypar=self.loss_hypar,
+                                  forecast=forecast,
+                                  target=outsample_y,
+                                  mask=outsample_mask)
 
         self.log('train_loss', loss, prog_bar=True, on_epoch=True)
 
@@ -687,18 +680,17 @@ class NBEATS(pl.LightningModule):
         S = batch['S']
         Y = batch['Y']
         X = batch['X']
+        available_mask = batch['available_mask']
 
-        available_mask  = batch['available_mask']
-        outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
+        outsample_y, forecast, outsample_mask = self.model(S=S, Y=Y, X=X,
+                                                           insample_mask=available_mask,
+                                                           return_decomposition=False)
 
-        outsample_y, forecast = self.model(S=S, Y=Y, X=X,
-                                           insample_mask=available_mask,
-                                           return_decomposition=False)
+        loss = self.loss_fn_valid(forecast=forecast,
+                                  target=outsample_y,
+                                  weights=outsample_mask)
 
-        loss = self.validation_loss_fn(target=outsample_y, forecast=forecast,
-                                       weights=outsample_mask)
-
-        self.log('val_loss', loss,  prog_bar=True)
+        self.log('val_loss', loss, prog_bar=True)
 
         return loss
 
@@ -711,19 +703,19 @@ class NBEATS(pl.LightningModule):
         S = batch['S']
         Y = batch['Y']
         X = batch['X']
-        available_mask  = batch['available_mask']
+        available_mask = batch['available_mask']
         outsample_mask = batch['sample_mask'][:, -self.n_time_out:]
 
         if self.return_decomposition:
-            outsample_y, forecast, block_forecast = self.model(S=S, Y=Y, X=X,
-                                                               insample_mask=available_mask,
-                                                               return_decomposition=True)
-            return outsample_y, forecast, block_forecast
+            outsample_y, forecast, block_forecast, outsample_mask = self.model(S=S, Y=Y, X=X,
+                                                                     insample_mask=available_mask,
+                                                                     return_decomposition=True)
+            return outsample_y, forecast, block_forecast, outsample_mask
 
-        outsample_y, forecast = self.model(S=S, Y=Y, X=X,
+        outsample_y, forecast, outsample_mask = self.model(S=S, Y=Y, X=X,
                                            insample_mask=available_mask,
                                            return_decomposition=False)
-        return outsample_y, forecast
+        return outsample_y, forecast, outsample_mask
 
     def configure_optimizers(self):
         optimizer = optim.Adam(self.model.parameters(),
@@ -731,7 +723,7 @@ class NBEATS(pl.LightningModule):
                                weight_decay=self.weight_decay)
 
         lr_scheduler = optim.lr_scheduler.StepLR(optimizer,
-                                                 step_size=self.lr_decay_steps,
+                                                 step_size=self.lr_decay_step_size,
                                                  gamma=self.lr_decay)
 
         return {'optimizer': optimizer, 'lr_scheduler': lr_scheduler}

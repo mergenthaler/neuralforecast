@@ -54,7 +54,7 @@ nb_path: "nbs/experiments__utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_mask_dfs" class="doc_header"><code>get_mask_dfs</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_mask_dfs</code>(<strong><code>Y_df</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>ds_in_test</code></strong>)</p>
+<h4 id="get_mask_dfs" class="doc_header"><code>get_mask_dfs</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_mask_dfs</code>(<strong><code>Y_df</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>ds_in_test</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -85,7 +85,7 @@ nb_path: "nbs/experiments__utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_random_mask_dfs" class="doc_header"><code>get_random_mask_dfs</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_random_mask_dfs</code>(<strong><code>Y_df</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>n_ds_val_window</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>freq</code></strong>)</p>
+<h4 id="get_random_mask_dfs" class="doc_header"><code>get_random_mask_dfs</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L67" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_random_mask_dfs</code>(<strong><code>Y_df</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>n_ds_val_window</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>freq</code></strong>)</p>
 </blockquote>
 <p>Generates train, test and random validation mask.
 Train mask begins by avoiding ds_in_test</p>
@@ -133,7 +133,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="scale_data" class="doc_header"><code>scale_data</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L120" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>scale_data</code>(<strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>mask_df</code></strong>, <strong><code>normalizer_y</code></strong>, <strong><code>normalizer_x</code></strong>)</p>
+<h4 id="scale_data" class="doc_header"><code>scale_data</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L123" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>scale_data</code>(<strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>mask_df</code></strong>, <strong><code>normalizer_y</code></strong>, <strong><code>normalizer_x</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -164,7 +164,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_datasets" class="doc_header"><code>create_datasets</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L138" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_datasets</code>(<strong><code>mc</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>)</p>
+<h4 id="create_datasets" class="doc_header"><code>create_datasets</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L141" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_datasets</code>(<strong><code>mc</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -195,7 +195,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="instantiate_loaders" class="doc_header"><code>instantiate_loaders</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L197" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_loaders</code>(<strong><code>mc</code></strong>, <strong><code>train_dataset</code></strong>, <strong><code>val_dataset</code></strong>, <strong><code>test_dataset</code></strong>)</p>
+<h4 id="instantiate_loaders" class="doc_header"><code>instantiate_loaders</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L200" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_loaders</code>(<strong><code>mc</code></strong>, <strong><code>train_dataset</code></strong>, <strong><code>valid_dataset</code></strong>, <strong><code>test_dataset</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -226,7 +226,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="instantiate_nbeats" class="doc_header"><code>instantiate_nbeats</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_nbeats</code>(<strong><code>mc</code></strong>)</p>
+<h4 id="instantiate_nbeats" class="doc_header"><code>instantiate_nbeats</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_nbeats</code>(<strong><code>mc</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -257,7 +257,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="instantiate_esrnn" class="doc_header"><code>instantiate_esrnn</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L253" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_esrnn</code>(<strong><code>mc</code></strong>)</p>
+<h4 id="instantiate_esrnn" class="doc_header"><code>instantiate_esrnn</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_esrnn</code>(<strong><code>mc</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -288,7 +288,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="instantiate_mqesrnn" class="doc_header"><code>instantiate_mqesrnn</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L285" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_mqesrnn</code>(<strong><code>mc</code></strong>)</p>
+<h4 id="instantiate_mqesrnn" class="doc_header"><code>instantiate_mqesrnn</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L290" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_mqesrnn</code>(<strong><code>mc</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -319,7 +319,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="instantiate_model" class="doc_header"><code>instantiate_model</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L314" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_model</code>(<strong><code>mc</code></strong>)</p>
+<h4 id="instantiate_model" class="doc_header"><code>instantiate_model</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L319" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>instantiate_model</code>(<strong><code>mc</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -350,7 +350,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="model_fit_predict" class="doc_header"><code>model_fit_predict</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L321" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>model_fit_predict</code>(<strong><code>mc</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>)</p>
+<h4 id="model_fit_predict" class="doc_header"><code>model_fit_predict</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L326" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>model_fit_predict</code>(<strong><code>mc</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -381,7 +381,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="evaluate_model" class="doc_header"><code>evaluate_model</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L376" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate_model</code>(<strong><code>mc</code></strong>, <strong><code>loss_function</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>, <strong><code>loss_kwargs</code></strong>)</p>
+<h4 id="evaluate_model" class="doc_header"><code>evaluate_model</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L404" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>evaluate_model</code>(<strong><code>mc</code></strong>, <strong><code>loss_function</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_test</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>, <strong><code>loss_kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -412,7 +412,7 @@ freq: str
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="hyperopt_tunning" class="doc_header"><code>hyperopt_tunning</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L423" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hyperopt_tunning</code>(<strong><code>space</code></strong>, <strong><code>hyperopt_max_evals</code></strong>, <strong><code>loss_function</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>, <strong><code>save_trials</code></strong>=<em><code>False</code></em>, <strong><code>loss_kwargs</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="hyperopt_tunning" class="doc_header"><code>hyperopt_tunning</code><a href="https://github.com/Grupo-Abraxas/nixtla/tree/master/nixtla/experiments/utils.py#L450" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hyperopt_tunning</code>(<strong><code>space</code></strong>, <strong><code>hyperopt_max_evals</code></strong>, <strong><code>loss_function</code></strong>, <strong><code>S_df</code></strong>, <strong><code>Y_df</code></strong>, <strong><code>X_df</code></strong>, <strong><code>f_cols</code></strong>, <strong><code>ds_in_val</code></strong>, <strong><code>n_uids</code></strong>, <strong><code>n_val_windows</code></strong>, <strong><code>freq</code></strong>, <strong><code>is_val_random</code></strong>, <strong><code>save_trials</code></strong>=<em><code>False</code></em>, <strong><code>loss_kwargs</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -469,8 +469,10 @@ freq: str
 <span class="n">nbeats_space</span><span class="o">=</span> <span class="p">{</span><span class="c1"># Architecture parameters</span>
                <span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="s1">&#39;nbeats&#39;</span><span class="p">,</span>
                <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;simple&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">]),</span>
-               <span class="s1">&#39;output_size&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;output_size&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">24</span><span class="p">]),</span>
+               <span class="s1">&#39;n_time_in&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_time_in&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="o">*</span><span class="mi">24</span><span class="p">]),</span>
+               <span class="s1">&#39;n_time_out&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_time_out&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">24</span><span class="p">]),</span>
+               <span class="s1">&#39;n_x_hidden&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;n_x_hidden&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+               <span class="s1">&#39;n_s_hidden&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_s_hidden&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]),</span>    
                <span class="s1">&#39;shared_weights&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;shared_weights&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">]),</span>
                <span class="s1">&#39;activation&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;activation&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;SELU&#39;</span><span class="p">]),</span>
                <span class="s1">&#39;initialization&#39;</span><span class="p">:</span>  <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;initialization&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;glorot_normal&#39;</span><span class="p">,</span><span class="s1">&#39;he_normal&#39;</span><span class="p">]),</span>
@@ -482,23 +484,22 @@ freq: str
                <span class="s1">&#39;n_hidden&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_hidden&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="mi">364</span> <span class="p">]),</span>
                <span class="s1">&#39;n_harmonics&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_harmonics&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
                <span class="s1">&#39;n_polynomials&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_polynomials&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
-               <span class="s1">&#39;exogenous_n_channels&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;exogenous_n_channels&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-               <span class="s1">&#39;x_s_n_hidden&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;x_s_n_hidden&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                <span class="c1"># Regularization and optimization parameters</span>
                <span class="s1">&#39;batch_normalization&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;batch_normalization&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">False</span><span class="p">]),</span>
                <span class="s1">&#39;dropout_prob_theta&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;dropout_prob_theta&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
                <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">5e-4</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)),</span>
+               <span class="s1">&#39;gradient_clip_val&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;gradient_clip_val&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]),</span>
                <span class="s1">&#39;lr_decay&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;lr_decay&#39;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
-               <span class="s1">&#39;n_lr_decay_steps&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_lr_decay_steps&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+               <span class="s1">&#39;lr_decay_step_size&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;lr_decay_step_size&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
                <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">5e-5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">5e-3</span><span class="p">)),</span>
-               <span class="s1">&#39;n_iterations&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_iterations&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]),</span> <span class="c1">#[args.max_epochs]),</span>
-               <span class="s1">&#39;early_stopping&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;early_stopping&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">16</span><span class="p">]),</span>
+               <span class="s1">&#39;max_epochs&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;max_epochs&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]),</span> <span class="c1">#n_iterations</span>
+               <span class="s1">&#39;max_steps&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;max_steps&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]),</span>
+               <span class="s1">&#39;early_stop_patience&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;early_stop_patience&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">16</span><span class="p">]),</span>
                <span class="s1">&#39;eval_freq&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;eval_freq&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">]),</span>
                <span class="s1">&#39;n_val_weeks&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_val_weeks&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">52</span><span class="o">*</span><span class="mi">2</span><span class="p">]),</span>
-               <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">]),</span>
-               <span class="s1">&#39;loss_hypar&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;loss_hypar&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]),</span>                
-               <span class="s1">&#39;val_loss&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">]),</span> <span class="c1">#[args.val_loss]),</span>
-               <span class="s1">&#39;l1_theta&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;l1_theta&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+               <span class="s1">&#39;loss_train&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;loss_train&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">]),</span>
+               <span class="s1">&#39;loss_hypar&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;loss_hypar&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]),</span>
+               <span class="s1">&#39;loss_valid&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;loss_valid&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">]),</span>
                <span class="c1"># Data parameters</span>
                <span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]),</span>
                <span class="s1">&#39;normalizer_y&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;normalizer_y&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]),</span>
@@ -515,12 +516,16 @@ freq: str
                <span class="s1">&#39;random_seed&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;random_seed&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
                <span class="s1">&#39;device&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;device&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">device</span><span class="p">])}</span>
 
+
 <span class="n">mc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="s1">&#39;nbeats&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;simple&#39;</span><span class="p">,</span>
       <span class="c1"># Architecture parameters</span>
-      <span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-      <span class="s1">&#39;output_size&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;n_time_in&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;n_time_out&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+      <span class="s1">&#39;n_s_hidden&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s1">&#39;n_x_hidden&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
       <span class="s1">&#39;shared_weights&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-      <span class="s1">&#39;activation&#39;</span><span class="p">:</span> <span class="s1">&#39;selu&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;activation&#39;</span><span class="p">:</span> <span class="s1">&#39;SELU&#39;</span><span class="p">,</span>
       <span class="s1">&#39;initialization&#39;</span><span class="p">:</span> <span class="s1">&#39;he_normal&#39;</span><span class="p">,</span>
       <span class="s1">&#39;stack_types&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;exogenous_tcn&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;identity&#39;</span><span class="p">],</span>
       <span class="s1">&#39;n_blocks&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
@@ -528,24 +533,25 @@ freq: str
       <span class="s1">&#39;n_hidden&#39;</span><span class="p">:</span> <span class="mi">364</span><span class="p">,</span>
       <span class="s1">&#39;n_polynomials&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
       <span class="s1">&#39;n_harmonics&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s1">&#39;exogenous_n_channels&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s1">&#39;x_s_n_hidden&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="c1"># Regularization and optimization parameters</span>
       <span class="s1">&#39;batch_normalization&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
       <span class="s1">&#39;dropout_prob_theta&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
-      <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="c1">#0.002,</span>
+      <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.0005</span><span class="p">,</span>
+      <span class="s1">&#39;gradient_clip_val&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
       <span class="s1">&#39;lr_decay&#39;</span><span class="p">:</span> <span class="mf">0.64</span><span class="p">,</span>
-      <span class="s1">&#39;n_lr_decay_steps&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s1">&#39;lr_decay_step_size&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
       <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.00015</span><span class="p">,</span>
-      <span class="s1">&#39;n_iterations&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="s1">&#39;early_stopping&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="s1">&#39;max_epochs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s1">&#39;max_steps&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="c1">#n_iterations</span>
+      <span class="s1">&#39;early_stop_patience&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
       <span class="s1">&#39;eval_freq&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
       <span class="s1">&#39;n_val_weeks&#39;</span><span class="p">:</span> <span class="mi">52</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
-      <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="s1">&#39;PINBALL&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;loss_hypar&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="c1">#0.49,</span>
-      <span class="s1">&#39;val_loss&#39;</span><span class="p">:</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;loss_train&#39;</span><span class="p">:</span> <span class="s1">&#39;PINBALL&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;loss_hypar&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+      <span class="s1">&#39;loss_valid&#39;</span><span class="p">:</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span>
       <span class="s1">&#39;l1_theta&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="c1"># Data parameters</span>
+      <span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
       <span class="s1">&#39;normalizer_y&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
       <span class="s1">&#39;normalizer_x&#39;</span><span class="p">:</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span>
       <span class="s1">&#39;window_sampling_limit&#39;</span><span class="p">:</span> <span class="mi">100_000</span><span class="p">,</span>
@@ -574,86 +580,106 @@ freq: str
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">esrnn_space</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;esrnn&#39;</span><span class="p">]),</span>
-               <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span>
-               <span class="c1"># Architecture parameters</span>
-               <span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">]),</span>
-               <span class="s1">&#39;output_size&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;output_size&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">24</span><span class="p">]),</span>
-               <span class="s1">&#39;dilations&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;dilations&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">]]</span> <span class="p">]),</span>
-               <span class="s1">&#39;es_component&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;es_component&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;multiplicative&#39;</span><span class="p">]),</span>
-               <span class="s1">&#39;cell_type&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;LSTM&#39;</span><span class="p">]),</span>
-               <span class="s1">&#39;state_hsize&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;state_hsize&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-               <span class="s1">&#39;add_nl_layer&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;add_nl_layer&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]),</span>
-               <span class="s1">&#39;seasonality&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;seasonality&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="p">[</span><span class="mi">24</span><span class="p">]</span> <span class="p">]),</span>
-               <span class="c1"># Regularization and optimization parameters</span>
-               <span class="s1">&#39;n_iterations&#39;</span><span class="p">:</span><span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_iterations&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]),</span>
-               <span class="s1">&#39;early_stopping&#39;</span><span class="p">:</span><span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;early_stopping&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]),</span>
-               <span class="s1">&#39;eval_freq&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;eval_freq&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">]),</span>
-               <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;batch_size&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">32</span><span class="p">]),</span>
-               <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">5e-4</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)),</span>
-               <span class="s1">&#39;lr_scheduler_step_size&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;lr_scheduler_step_size&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">]),</span>
-               <span class="s1">&#39;lr_decay&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;lr_decay&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
-               <span class="s1">&#39;per_series_lr_multip&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;per_series_lr_multip&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]),</span>
-               <span class="s1">&#39;gradient_eps&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;gradient_eps&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1e-8</span><span class="p">]),</span>
-               <span class="s1">&#39;gradient_clipping_threshold&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;gradient_clipping_threshold&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]),</span>
-               <span class="s1">&#39;rnn_weight_decay&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;rnn_weight_decay&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">]),</span>
-               <span class="s1">&#39;noise_std&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;noise_std&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)),</span>
-               <span class="s1">&#39;level_variability_penalty&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;level_variability_penalty&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-               <span class="s1">&#39;testing_percentile&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;testing_percentile&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">]),</span>
-               <span class="s1">&#39;training_percentile&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;training_percentile&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">51</span><span class="p">]),</span>
-               <span class="s1">&#39;random_seed&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;random_seed&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-               <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;SMYL&#39;</span><span class="p">]),</span>
-               <span class="s1">&#39;val_loss&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">]),</span>
-               <span class="c1"># Data parameters</span>
-               <span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="p">]),</span>
-               <span class="s1">&#39;window_sampling_limit&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;window_sampling_limit&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">500_000</span><span class="p">]),</span>
-               <span class="s1">&#39;complete_inputs&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;complete_inputs&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">]),</span>
-               <span class="s1">&#39;complete_sample&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;complete_sample&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">True</span><span class="p">]),</span>
-               <span class="s1">&#39;idx_to_sample_freq&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;idx_to_sample_freq&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">24</span><span class="p">]),</span>
-               <span class="s1">&#39;val_idx_to_sample_freq&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;val_idx_to_sample_freq&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">24</span><span class="p">]),</span>
-               <span class="s1">&#39;n_series_per_batch&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;n_series_per_batch&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-               <span class="s1">&#39;normalizer_y&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;normalizer_y&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]),</span>
-               <span class="s1">&#39;normalizer_x&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s1">&#39;normalizer_x&#39;</span><span class="p">,</span>  <span class="p">[</span><span class="kc">None</span><span class="p">])}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># mc[&#39;n_x&#39;] = 2</span>
+<span class="c1"># model = instantiate_nbeats(mc)</span>
+</pre></div>
 
-<span class="n">mc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="s1">&#39;esrnn&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span>
-      <span class="c1"># Architecture parameters</span>
-      <span class="s1">&#39;input_size_multiplier&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-      <span class="s1">&#39;output_size&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
-      <span class="s1">&#39;dilations&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">]],</span>
-      <span class="s1">&#39;es_component&#39;</span><span class="p">:</span> <span class="s1">&#39;multiplicative&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;cell_type&#39;</span><span class="p">:</span> <span class="s1">&#39;LSTM&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;state_hsize&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-      <span class="s1">&#39;add_nl_layer&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-      <span class="s1">&#39;seasonality&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">24</span><span class="p">],</span>
-      <span class="c1"># Regularization and optimization parameters</span>
-      <span class="s1">&#39;n_iterations&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span><span class="c1">#00,</span>
-      <span class="s1">&#39;early_stopping&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="s1">&#39;eval_freq&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-      <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.0005</span><span class="p">,</span>
-      <span class="s1">&#39;lr_scheduler_step_size&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="s1">&#39;lr_decay&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-      <span class="s1">&#39;per_series_lr_multip&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>
-      <span class="s1">&#39;gradient_eps&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> 
-      <span class="s1">&#39;gradient_clipping_threshold&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-      <span class="s1">&#39;rnn_weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-      <span class="s1">&#39;noise_std&#39;</span><span class="p">:</span> <span class="mf">0.0005</span><span class="p">,</span>
-      <span class="s1">&#39;level_variability_penalty&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="s1">&#39;testing_percentile&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-      <span class="s1">&#39;training_percentile&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-      <span class="s1">&#39;random_seed&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="s1">&#39;SMYL&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;val_loss&#39;</span><span class="p">:</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span>
-      <span class="c1"># Data parameters</span>
-      <span class="s1">&#39;len_sample_chunks&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
-      <span class="s1">&#39;window_sampling_limit&#39;</span><span class="p">:</span> <span class="mi">500_000</span><span class="p">,</span>
-      <span class="s1">&#39;complete_inputs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-      <span class="s1">&#39;idx_to_sample_freq&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
-      <span class="s1">&#39;val_idx_to_sample_freq&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
-      <span class="s1">&#39;n_series_per_batch&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s1">&#39;normalizer_y&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="s1">&#39;normalizer_x&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#                &#39;mode&#39;: &#39;full&#39;,</span>
+<span class="c1">#                # Architecture parameters</span>
+<span class="c1">#                &#39;input_size_multiplier&#39;: hp.choice(&#39;input_size_multiplier&#39;, [7]),</span>
+<span class="c1">#                &#39;output_size&#39;: hp.choice(&#39;output_size&#39;, [24]),</span>
+<span class="c1">#                &#39;dilations&#39;: hp.choice(&#39;dilations&#39;, [ [[1, 2]], [[1,2], [7, 14]] ]),</span>
+<span class="c1">#                &#39;es_component&#39;: hp.choice(&#39;es_component&#39;, [&#39;multiplicative&#39;]),</span>
+<span class="c1">#                &#39;cell_type&#39;: hp.choice(&#39;cell_type&#39;, [&#39;LSTM&#39;]),</span>
+<span class="c1">#                &#39;state_hsize&#39;: hp.quniform(&#39;state_hsize&#39;, 10, 100, 10),</span>
+<span class="c1">#                &#39;add_nl_layer&#39;: hp.choice(&#39;add_nl_layer&#39;, [True, False]),</span>
+<span class="c1">#                &#39;seasonality&#39;: hp.choice(&#39;seasonality&#39;, [ [24] ]),</span>
+<span class="c1">#                # Regularization and optimization parameters</span>
+<span class="c1">#                &#39;n_iterations&#39;:hp.choice(&#39;n_iterations&#39;, [10]),</span>
+<span class="c1">#                &#39;early_stopping&#39;:hp.choice(&#39;early_stopping&#39;, [10]),</span>
+<span class="c1">#                &#39;eval_freq&#39;: hp.choice(&#39;eval_freq&#39;, [10]),</span>
+<span class="c1">#                &#39;batch_size&#39;: hp.choice(&#39;batch_size&#39;, [32]),</span>
+<span class="c1">#                &#39;learning_rate&#39;: hp.loguniform(&#39;learning_rate&#39;, np.log(5e-4), np.log(0.01)),</span>
+<span class="c1">#                &#39;gradient_clip_val&#39;: hp.choice(&#39;gradient_clip_val&#39;, [1.0]),</span>
+<span class="c1">#                &#39;lr_scheduler_step_size&#39;: hp.choice(&#39;lr_scheduler_step_size&#39;, [100]),</span>
+<span class="c1">#                &#39;lr_decay&#39;: hp.quniform(&#39;lr_decay&#39;, 0.5, 0.8, 0.1),</span>
+<span class="c1">#                &#39;per_series_lr_multip&#39;: hp.choice(&#39;per_series_lr_multip&#39;, [0.5, 1.0, 1.5, 2.0, 3.0]),</span>
+<span class="c1">#                &#39;gradient_eps&#39;: hp.choice(&#39;gradient_eps&#39;, [1e-8]),</span>
+<span class="c1">#                &#39;gradient_clipping_threshold&#39;: hp.choice(&#39;gradient_clipping_threshold&#39;, [10, 50]),</span>
+<span class="c1">#                &#39;rnn_weight_decay&#39;: hp.choice(&#39;rnn_weight_decay&#39;, [0, 0.0005, 0.005]),</span>
+<span class="c1">#                &#39;noise_std&#39;: hp.loguniform(&#39;noise_std&#39;, np.log(0.0001), np.log(0.001)),</span>
+<span class="c1">#                &#39;level_variability_penalty&#39;: hp.quniform(&#39;level_variability_penalty&#39;, 0, 100, 10),</span>
+<span class="c1">#                &#39;testing_percentile&#39;: hp.choice(&#39;testing_percentile&#39;, [50]),</span>
+<span class="c1">#                &#39;training_percentile&#39;: hp.choice(&#39;training_percentile&#39;, [48, 49, 50, 51]),</span>
+<span class="c1">#                &#39;random_seed&#39;: hp.quniform(&#39;random_seed&#39;, 1, 1000, 1),</span>
+<span class="c1">#                &#39;loss&#39;: hp.choice(&#39;loss&#39;, [&#39;SMYL&#39;]),</span>
+<span class="c1">#                &#39;val_loss&#39;: hp.choice(&#39;val_loss&#39;, [&#39;MAE&#39;]),</span>
+<span class="c1">#                # Data parameters</span>
+<span class="c1">#                &#39;len_sample_chunks&#39;: hp.choice(&#39;len_sample_chunks&#39;, [7*3*24]),</span>
+<span class="c1">#                &#39;window_sampling_limit&#39;: hp.choice(&#39;window_sampling_limit&#39;, [500_000]),</span>
+<span class="c1">#                &#39;complete_inputs&#39;: hp.choice(&#39;complete_inputs&#39;, [True]),</span>
+<span class="c1">#                &#39;complete_sample&#39;: hp.choice(&#39;complete_sample&#39;, [True]),</span>
+<span class="c1">#                &#39;idx_to_sample_freq&#39;: hp.choice(&#39;idx_to_sample_freq&#39;, [24]),</span>
+<span class="c1">#                &#39;val_idx_to_sample_freq&#39;: hp.choice(&#39;val_idx_to_sample_freq&#39;, [24]),</span>
+<span class="c1">#                &#39;n_series_per_batch&#39;: hp.choice(&#39;n_series_per_batch&#39;, [1]),</span>
+<span class="c1">#                &#39;normalizer_y&#39;: hp.choice(&#39;normalizer_y&#39;, [None]),</span>
+<span class="c1">#                &#39;normalizer_x&#39;: hp.choice(&#39;normalizer_x&#39;,  [None])}</span>
+
+<span class="c1"># mc = {&#39;model&#39;:&#39;esrnn&#39;,</span>
+<span class="c1">#       &#39;mode&#39;: &#39;full&#39;,</span>
+<span class="c1">#       # Architecture parameters</span>
+<span class="c1">#       &#39;n_time_in&#39;: 7*24,</span>
+<span class="c1">#       &#39;n_time_out&#39;: 24,</span>
+<span class="c1">#       &#39;dilations&#39;: [[1,2], [7]],</span>
+<span class="c1">#       &#39;es_component&#39;: &#39;multiplicative&#39;,</span>
+<span class="c1">#       &#39;cell_type&#39;: &#39;LSTM&#39;,</span>
+<span class="c1">#       &#39;state_hsize&#39;: 50,</span>
+<span class="c1">#       &#39;add_nl_layer&#39;: False,</span>
+<span class="c1">#       &#39;seasonality&#39;: [24],</span>
+<span class="c1">#       # Regularization and optimization parameters</span>
+<span class="c1">#       &#39;max_epochs&#39;: 1, </span>
+<span class="c1">#       &#39;max_steps&#39;: 10, #&#39;n_iterations&#39;: 10,#00,</span>
+<span class="c1">#       &#39;early_stop_patience&#39;: 10,</span>
+<span class="c1">#       &#39;eval_freq&#39;: 10,</span>
+<span class="c1">#       &#39;batch_size&#39;: 32,</span>
+<span class="c1">#       &#39;learning_rate&#39;: 0.0005,</span>
+<span class="c1">#       &#39;gradient_clip_val&#39;: 1.0,</span>
+<span class="c1">#       &#39;lr_scheduler_step_size&#39;: 100,</span>
+<span class="c1">#       &#39;lr_decay&#39;: 0.8,</span>
+<span class="c1">#       &#39;per_series_lr_multip&#39;: 1.5,</span>
+<span class="c1">#       &#39;gradient_eps&#39;: 1e-8, </span>
+<span class="c1">#       &#39;gradient_clipping_threshold&#39;: 20,</span>
+<span class="c1">#       &#39;rnn_weight_decay&#39;: 0.0,</span>
+<span class="c1">#       &#39;noise_std&#39;: 0.0005,</span>
+<span class="c1">#       &#39;level_variability_penalty&#39;: 10,</span>
+<span class="c1">#       &#39;testing_percentile&#39;: 50,</span>
+<span class="c1">#       &#39;training_percentile&#39;: 50,</span>
+<span class="c1">#       &#39;random_seed&#39;: 1,</span>
+<span class="c1">#       &#39;loss&#39;: &#39;SMYL&#39;,</span>
+<span class="c1">#       &#39;val_loss&#39;: &#39;MAE&#39;,</span>
+<span class="c1">#       # Data parameters</span>
+<span class="c1">#       &#39;len_sample_chunks&#39;: 7*4*24,</span>
+<span class="c1">#       &#39;window_sampling_limit&#39;: 500_000,</span>
+<span class="c1">#       &#39;complete_inputs&#39;: True,</span>
+<span class="c1">#       &#39;idx_to_sample_freq&#39;: 24,</span>
+<span class="c1">#       &#39;val_idx_to_sample_freq&#39;: 24,</span>
+<span class="c1">#       &#39;n_series_per_batch&#39;: 1,</span>
+<span class="c1">#       &#39;normalizer_y&#39;: None,</span>
+<span class="c1">#       &#39;normalizer_x&#39;: None}</span>
 </pre></div>
 
     </div>
@@ -734,14 +760,239 @@ freq: str
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#                         S_df=S_df, Y_df=Y_df, X_df=X_df, f_cols=[],</span>
-<span class="c1">#                         ds_in_test=0, ds_in_val=728*24,</span>
-<span class="c1">#                         n_uids=None, n_val_windows=None, freq=None,</span>
-<span class="c1">#                         is_val_random=False, loss_kwargs={})</span>
-<span class="c1"># result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span><span class="n">loss_function</span><span class="o">=</span><span class="n">mae</span><span class="p">,</span> <span class="n">mc</span><span class="o">=</span><span class="n">mc</span><span class="p">,</span>
+                        <span class="n">S_df</span><span class="o">=</span><span class="n">S_df</span><span class="p">,</span> <span class="n">Y_df</span><span class="o">=</span><span class="n">Y_df</span><span class="p">,</span> <span class="n">X_df</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">f_cols</span><span class="o">=</span><span class="p">[],</span>
+                        <span class="n">ds_in_test</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ds_in_val</span><span class="o">=</span><span class="mi">728</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span>
+                        <span class="n">n_uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_val_windows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">is_val_random</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loss_kwargs</span><span class="o">=</span><span class="p">{})</span>
+<span class="n">result</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2016-12-27 2018-12-24 23:00:00
+          1           2013-01-01 2016-12-26 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=66.67, 	34944 time stamps 
+Outsample percentage=33.33, 	17472 time stamps 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>===============================================
+
+model                                        nbeats
+mode                                         simple
+n_time_in                                       168
+n_time_out                                       24
+n_s_hidden                                        0
+n_x_hidden                                        3
+shared_weights                                False
+activation                                     SELU
+initialization                            he_normal
+stack_types               [exogenous_tcn, identity]
+n_blocks                                     [1, 1]
+n_layers                                     [2, 2]
+n_hidden                                        364
+n_polynomials                                     2
+n_harmonics                                       1
+batch_normalization                           False
+dropout_prob_theta                              0.2
+learning_rate                                0.0005
+gradient_clip_val                               1.0
+lr_decay                                       0.64
+lr_decay_step_size                                3
+weight_decay                                0.00015
+max_epochs                                        1
+max_steps                                       100
+early_stop_patience                               8
+eval_freq                                        50
+n_val_weeks                                     104
+loss_train                                  PINBALL
+loss_hypar                                      0.5
+loss_valid                                      MAE
+l1_theta                                          0
+len_sample_chunks                              None
+normalizer_y                                   None
+normalizer_x                                 median
+window_sampling_limit                        100000
+complete_inputs                               False
+frequency                                         H
+seasonality                                      24
+idx_to_sample_freq                               24
+val_idx_to_sample_freq                           24
+batch_size                                      256
+n_series_per_batch                                1
+random_seed                                      10
+device                                          cpu
+dtype: object
+===============================================
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2013-01-01 2016-12-26 23:00:00
+          1           2016-12-27 2018-12-24 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=33.33, 	17472 time stamps 
+Outsample percentage=66.67, 	34944 time stamps 
+
+INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2013-01-01 2018-12-24 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=0.0, 	0 time stamps 
+Outsample percentage=100.0, 	52416 time stamps 
+
+GPU available: True, used: False
+TPU available: False, using: 0 TPU cores
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: GPU available but not used. Set the gpus flag in your trainer `Trainer(gpus=1)` or script `--gpus=1`.
+  warnings.warn(*args, **kwargs)
+
+  | Name  | Type    | Params
+----------------------------------
+0 | model | _NBEATS | 600 K 
+----------------------------------
+600 K     Trainable params
+0         Non-trainable params
+600 K     Total params
+2.404     Total estimated model params size (MB)
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, val dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, train dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, predict dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>y_true.shape (#n_series, #n_fcds, #lt): (728, 24)
+y_hat.shape (#n_series, #n_fcds, #lt): (728, 24)
+mask.shape (#n_series, #n_fcds, #lt): (728, 24)
+
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;loss&#39;: 30.623476,
+ &#39;mc&#39;: {&#39;model&#39;: &#39;nbeats&#39;,
+  &#39;mode&#39;: &#39;simple&#39;,
+  &#39;n_time_in&#39;: 168,
+  &#39;n_time_out&#39;: 24,
+  &#39;n_s_hidden&#39;: 0,
+  &#39;n_x_hidden&#39;: 3,
+  &#39;shared_weights&#39;: False,
+  &#39;activation&#39;: &#39;SELU&#39;,
+  &#39;initialization&#39;: &#39;he_normal&#39;,
+  &#39;stack_types&#39;: [&#39;exogenous_tcn&#39;, &#39;identity&#39;],
+  &#39;n_blocks&#39;: [1, 1],
+  &#39;n_layers&#39;: [2, 2],
+  &#39;n_hidden&#39;: 364,
+  &#39;n_polynomials&#39;: 2,
+  &#39;n_harmonics&#39;: 1,
+  &#39;batch_normalization&#39;: False,
+  &#39;dropout_prob_theta&#39;: 0.2,
+  &#39;learning_rate&#39;: 0.0005,
+  &#39;gradient_clip_val&#39;: 1.0,
+  &#39;lr_decay&#39;: 0.64,
+  &#39;lr_decay_step_size&#39;: 3,
+  &#39;weight_decay&#39;: 0.00015,
+  &#39;max_epochs&#39;: 1,
+  &#39;max_steps&#39;: 100,
+  &#39;early_stop_patience&#39;: 8,
+  &#39;eval_freq&#39;: 50,
+  &#39;n_val_weeks&#39;: 104,
+  &#39;loss_train&#39;: &#39;PINBALL&#39;,
+  &#39;loss_hypar&#39;: 0.5,
+  &#39;loss_valid&#39;: &#39;MAE&#39;,
+  &#39;l1_theta&#39;: 0,
+  &#39;len_sample_chunks&#39;: None,
+  &#39;normalizer_y&#39;: None,
+  &#39;normalizer_x&#39;: &#39;median&#39;,
+  &#39;window_sampling_limit&#39;: 100000,
+  &#39;complete_inputs&#39;: False,
+  &#39;frequency&#39;: &#39;H&#39;,
+  &#39;seasonality&#39;: 24,
+  &#39;idx_to_sample_freq&#39;: 24,
+  &#39;val_idx_to_sample_freq&#39;: 24,
+  &#39;batch_size&#39;: 256,
+  &#39;n_series_per_batch&#39;: 1,
+  &#39;random_seed&#39;: 10,
+  &#39;device&#39;: &#39;cpu&#39;,
+  &#39;n_x&#39;: 1,
+  &#39;n_s&#39;: 1,
+  &#39;n_theta_hidden&#39;: [[364, 364], [364, 364]]},
+ &#39;y_true&#39;: array([[24.08, 22.52, 20.13, ..., 28.37, 27.24, 25.73],
+        [26.45, 26.26, 26.24, ..., 30.65, 30.02, 29.37],
+        [29.26, 28.72, 28.29, ..., 30.01, 29.44, 28.76],
+        ...,
+        [48.39, 47.72, 47.23, ..., 52.05, 51.09, 50.47],
+        [51.49, 50.83, 50.74, ..., 53.99, 53.86, 52.32],
+        [51.09, 50.19, 48.98, ..., 49.09, 49.02, 48.1 ]], dtype=float32),
+ &#39;y_hat&#39;: array([[-1.3118649 ,  5.402053  ,  1.802145  , ...,  4.047285  ,
+         22.839409  ,  8.426743  ],
+        [-1.6711636 , 12.270115  ,  2.4305573 , ..., 17.342396  ,
+         15.103126  ,  8.227893  ],
+        [ 1.5839996 , 15.180986  ,  4.2275143 , ..., 21.330765  ,
+         12.939674  , -3.1269093 ],
+        ...,
+        [24.70328   , 29.539616  , -8.1286545 , ...,  6.885969  ,
+         37.893387  , 16.590033  ],
+        [-3.4569798 ,  8.332322  , 24.423515  , ..., -0.10174751,
+         44.082798  , 25.952559  ],
+        [44.54266   , 40.05263   , 38.57358   , ..., 35.649136  ,
+         65.43605   , 45.71382   ]], dtype=float32),
+ &#39;run_time&#39;: 2.6711552143096924,
+ &#39;status&#39;: &#39;ok&#39;}</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -772,12 +1023,313 @@ freq: str
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#                           S_df=S_df, Y_df=Y_df, X_df=X_df, f_cols=[],</span>
-<span class="c1">#                           ds_in_val=728*24, n_uids=None, n_val_windows=None, freq=None,</span>
-<span class="c1">#                           is_val_random=False, loss_kwargs={})</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trials</span> <span class="o">=</span> <span class="n">hyperopt_tunning</span><span class="p">(</span><span class="n">space</span><span class="o">=</span><span class="n">nbeats_space</span><span class="p">,</span> <span class="n">hyperopt_max_evals</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">mae</span><span class="p">,</span>
+                          <span class="n">S_df</span><span class="o">=</span><span class="n">S_df</span><span class="p">,</span> <span class="n">Y_df</span><span class="o">=</span><span class="n">Y_df</span><span class="p">,</span> <span class="n">X_df</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">f_cols</span><span class="o">=</span><span class="p">[],</span>
+                          <span class="n">ds_in_val</span><span class="o">=</span><span class="mi">728</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span> <span class="n">n_uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_val_windows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">is_val_random</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loss_kwargs</span><span class="o">=</span><span class="p">{})</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  0%|          | 0/2 [00:00&lt;?, ?trial/s, best loss=?]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:hyperopt.tpe:build_posterior_wrapper took 0.012321 seconds
+INFO:hyperopt.tpe:TPE using 0 trials
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>===============================================      
+
+activation                                SELU       
+batch_normalization                      False
+batch_size                                 256
+complete_inputs                          False
+complete_sample                          False
+device                                    cuda
+dropout_prob_theta                    0.327262
+early_stop_patience                         16
+eval_freq                                   50
+frequency                                    H
+gradient_clip_val                          1.0
+idx_to_sample_freq                          24
+initialization                       he_normal
+learning_rate                           0.0006
+len_sample_chunks                         None
+loss_hypar                                 0.5
+loss_train                                 MAE
+loss_valid                                 MAE
+lr_decay                              0.353914
+lr_decay_step_size                           3
+max_epochs                                  10
+max_steps                                   10
+mode                                    simple
+model                                   nbeats
+n_blocks                                (1, 1)
+n_harmonics                                  1
+n_hidden                                   364
+n_layers                                (2, 2)
+n_polynomials                                2
+n_s_hidden                                   0
+n_series_per_batch                           1
+n_time_in                                  168
+n_time_out                                  24
+n_val_weeks                                104
+n_x_hidden                                 3.0
+normalizer_x                            median
+normalizer_y                              None
+random_seed                               10.0
+seasonality                                 24
+shared_weights                           False
+stack_types               (identity, identity)
+val_idx_to_sample_freq                      24
+weight_decay                          0.001826
+window_sampling_limit                   100000
+dtype: object
+===============================================      
+
+  0%|          | 0/2 [00:00&lt;?, ?trial/s, best loss=?]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2016-12-27 2018-12-24 23:00:00
+          1           2013-01-01 2016-12-26 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=66.67, 	34944 time stamps 
+Outsample percentage=33.33, 	17472 time stamps 
+
+INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2013-01-01 2016-12-26 23:00:00
+          1           2016-12-27 2018-12-24 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=33.33, 	17472 time stamps 
+Outsample percentage=66.67, 	34944 time stamps 
+
+INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2013-01-01 2018-12-24 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=0.0, 	0 time stamps 
+Outsample percentage=100.0, 	52416 time stamps 
+
+GPU available: True, used: False
+TPU available: False, using: 0 TPU cores
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: GPU available but not used. Set the gpus flag in your trainer `Trainer(gpus=1)` or script `--gpus=1`.
+  warnings.warn(*args, **kwargs)
+
+
+  | Name  | Type    | Params
+----------------------------------
+0 | model | _NBEATS | 668 K 
+----------------------------------
+668 K     Trainable params
+0         Non-trainable params
+668 K     Total params
+2.675     Total estimated model params size (MB)
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, val dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, train dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, predict dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>y_true.shape (#n_series, #n_fcds, #lt): (728, 24)    
+y_hat.shape (#n_series, #n_fcds, #lt): (728, 24)     
+mask.shape (#n_series, #n_fcds, #lt): (728, 24)      
+ 50%|█████     | 1/2 [00:04&lt;00:04,  4.02s/trial, best loss: 9.841371536254883]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:hyperopt.tpe:build_posterior_wrapper took 0.036056 seconds
+INFO:hyperopt.tpe:TPE using 1/1 trials with best loss 9.841372
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>===============================================                               
+
+activation                                     SELU                           
+batch_normalization                           False
+batch_size                                      256
+complete_inputs                               False
+complete_sample                               False
+device                                         cuda
+dropout_prob_theta                         0.181398
+early_stop_patience                              16
+eval_freq                                        50
+frequency                                         H
+gradient_clip_val                               1.0
+idx_to_sample_freq                               24
+initialization                            he_normal
+learning_rate                              0.000631
+len_sample_chunks                              None
+loss_hypar                                      0.5
+loss_train                                      MAE
+loss_valid                                      MAE
+lr_decay                                   0.371509
+lr_decay_step_size                                3
+max_epochs                                       10
+max_steps                                        10
+mode                                         simple
+model                                        nbeats
+n_blocks                                     (1, 1)
+n_harmonics                                       1
+n_hidden                                        364
+n_layers                                     (2, 2)
+n_polynomials                                     2
+n_s_hidden                                        0
+n_series_per_batch                                1
+n_time_in                                       168
+n_time_out                                       24
+n_val_weeks                                     104
+n_x_hidden                                      3.0
+normalizer_x                                 median
+normalizer_y                                   None
+random_seed                                    11.0
+seasonality                                      24
+shared_weights                                False
+stack_types               (identity, exogenous_tcn)
+val_idx_to_sample_freq                           24
+weight_decay                               0.000458
+window_sampling_limit                        100000
+dtype: object
+===============================================                               
+
+ 50%|█████     | 1/2 [00:04&lt;00:04,  4.02s/trial, best loss: 9.841371536254883]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2016-12-27 2018-12-24 23:00:00
+          1           2013-01-01 2016-12-26 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=66.67, 	34944 time stamps 
+Outsample percentage=33.33, 	17472 time stamps 
+
+INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2013-01-01 2016-12-26 23:00:00
+          1           2016-12-27 2018-12-24 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=33.33, 	17472 time stamps 
+Outsample percentage=66.67, 	34944 time stamps 
+
+INFO:root:Train Validation splits
+
+INFO:root:                              ds                    
+                             min                 max
+unique_id sample_mask                               
+NP        0           2013-01-01 2018-12-24 23:00:00
+INFO:root:
+Total data 			52416 time stamps 
+Available percentage=100.0, 	52416 time stamps 
+Insample  percentage=0.0, 	0 time stamps 
+Outsample percentage=100.0, 	52416 time stamps 
+
+GPU available: True, used: False
+TPU available: False, using: 0 TPU cores
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: GPU available but not used. Set the gpus flag in your trainer `Trainer(gpus=1)` or script `--gpus=1`.
+  warnings.warn(*args, **kwargs)
+
+
+  | Name  | Type    | Params
+----------------------------------
+0 | model | _NBEATS | 600 K 
+----------------------------------
+600 K     Trainable params
+0         Non-trainable params
+600 K     Total params
+2.404     Total estimated model params size (MB)
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, val dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, train dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+
+/home/ubuntu/anaconda3/envs/nixtla/lib/python3.7/site-packages/pytorch_lightning/utilities/distributed.py:69: UserWarning: The dataloader, predict dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>y_true.shape (#n_series, #n_fcds, #lt): (728, 24)                             
+y_hat.shape (#n_series, #n_fcds, #lt): (728, 24)                              
+mask.shape (#n_series, #n_fcds, #lt): (728, 24)                               
+100%|██████████| 2/2 [00:09&lt;00:00,  4.73s/trial, best loss: 9.841371536254883]
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -791,7 +1343,7 @@ freq: str
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trials</span><span class="o">.</span><span class="n">trials</span>
 </pre></div>
 
     </div>
