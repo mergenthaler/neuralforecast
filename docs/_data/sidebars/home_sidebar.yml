@@ -19,6 +19,9 @@ entries:
       title: EPF dataset
       url: data_datasets__epf.html
     - output: web,pdf
+      title: Kaggle-Competition-Favorita
+      url: data_datasets__favorita.html
+    - output: web,pdf
       title: GEFCom2012
       url: data_datasets__gefcom2012.html
     - output: web,pdf
@@ -48,6 +51,9 @@ entries:
     - output: web,pdf
       title: 'PyTorch Train Losses '
       url: losses__pytorch.html
+    - output: web,pdf
+      title: 'Losses utils '
+      url: losses__utils.html
     - output: web,pdf
       title: Chomp1d
       url: models_components__common.html

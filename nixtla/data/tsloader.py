@@ -3,6 +3,7 @@
 __all__ = ['TimeSeriesLoader', 'FastTimeSeriesLoader']
 
 # Cell
+import warnings
 from collections.abc import Mapping
 from typing import Dict, List, Union
 
@@ -16,9 +17,7 @@ from .tsdataset import TimeSeriesDataset
 # Cell
 class TimeSeriesLoader(DataLoader):
 
-    def __init__(self, dataset: TimeSeriesDataset,
-                 eq_batch_size: bool = False,
-                 shuffle: bool = False,
+    def __init__(self, dataset: TimeSeriesDataset, eq_batch_size: bool = False,
                  **kwargs) -> 'TimeSeriesLoader':
         """Wraps the pytorch `DataLoader` with a special collate function
         for the `TimeSeriesDataset` ouputs.
@@ -39,53 +38,57 @@ class TimeSeriesLoader(DataLoader):
             while `False` or `batch_size=None` returns all windows.
         """
         if 'collate_fn' in kwargs.keys():
-            raise Exeption(
+            warnings.warn(
                 'This class wraps the pytorch `DataLoader` with a '
                 'special collate function. If you want to use yours '
-                'simply use `DataLoader`'
+                'simply use `DataLoader`. Removing collate_fn'
             )
+            kwargs.pop('collate_fn')
 
-        self.shuffle = shuffle
         kwargs_ = {**kwargs, **dict(collate_fn=self._collate_fn)}
         DataLoader.__init__(self, dataset=dataset, **kwargs_)
         self.eq_batch_size = eq_batch_size
 
-    def _check_batch_size(self, batch: t.Tensor):
-        complete_batch = batch
-        if self.eq_batch_size and self.batch_size is not None:
-            n_windows = batch.size(0)
-            idxs = np.random.choice(n_windows, size=self.batch_size,
-                                    replace=(n_windows < self.batch_size))
-            complete_batch = batch[idxs]
-        return complete_batch
+# Cell
+@patch
+def _check_batch_size(self: TimeSeriesLoader, batch: t.Tensor):
+    complete_batch = batch
+    if self.eq_batch_size and self.batch_size is not None:
+        n_windows = batch.size(0)
+        idxs = np.random.choice(n_windows, size=self.batch_size,
+                                replace=(n_windows < self.batch_size))
+        complete_batch = batch[idxs]
+    return complete_batch
 
-    def _collate_fn(self, batch: Union[List, Dict[str, t.Tensor], t.Tensor]):
-        """Special collate fn for the `TimeSeriesDataset`.
+# Cell
+@patch
+def _collate_fn(self: TimeSeriesLoader, batch: Union[List, Dict[str, t.Tensor], t.Tensor]):
+    """Special collate fn for the `TimeSeriesDataset`.
 
-        Notes
-        -----
-        [1] Adapted from https://github.com/pytorch/pytorch/blob/master/torch/utils/data/_utils/collate.py.
-        """
-        elem = batch[0]
-        if len(batch) == 1:
-            return {key: self._check_batch_size(elem[key]) for key in elem}
+    Notes
+    -----
+    [1] Adapted from https://github.com/pytorch/pytorch/blob/master/torch/utils/data/_utils/collate.py.
+    """
+    elem = batch[0]
+    if len(batch) == 1:
+        return {key: self._check_batch_size(elem[key]) for key in elem}
 
-        elem_type = type(elem)
-        if isinstance(elem, t.Tensor):
-            out = None
-            if t.utils.data.get_worker_info() is not None:
-                # If we're in a background process, concatenate directly into a
-                # shared memory tensor to avoid an extra copy
-                numel = sum([x.numel() for x in batch])
-                storage = elem.storage()._new_shared(numel)
-                out = elem.new(storage)
-            complete_batch = t.cat(batch, out=out)
-            return self._check_batch_size(complete_batch)
+    elem_type = type(elem)
+    if isinstance(elem, t.Tensor):
+        out = None
+        if t.utils.data.get_worker_info() is not None:
+            # If we're in a background process, concatenate directly into a
+            # shared memory tensor to avoid an extra copy
+            numel = sum([x.numel() for x in batch])
+            storage = elem.storage()._new_shared(numel)
+            out = elem.new(storage)
+        complete_batch = t.cat(batch, out=out)
+        return self._check_batch_size(complete_batch)
 
-        elif isinstance(elem, Mapping):
-            return {key: self.collate_fn([d[key] for d in batch]) for key in elem}
+    elif isinstance(elem, Mapping):
+        return {key: self.collate_fn([d[key] for d in batch]) for key in elem}
 
-        raise TypeError(f'Unknown {elem_type}')
+    raise TypeError(f'Unknown {elem_type}')
 
 # Cell
 class FastTimeSeriesLoader:
@@ -134,29 +137,38 @@ class FastTimeSeriesLoader:
             n_batches += 1
         self.n_batches = n_batches
 
-    def __iter__(self):
-        if self.shuffle:
-            self.idxs = np.random.permutation(self.dataset_len)
 
-        self.i = 0
-        return self
+# Cell
+@patch
+def __iter__(self: FastTimeSeriesLoader):
+    if self.shuffle:
+        self.idxs = np.random.permutation(self.dataset_len)
 
-    def _check_batch_size(self, batch: t.Tensor):
-        complete_batch = batch
-        if self.eq_batch_size and self.batch_size is not None:
-            n_windows = batch.size(0)
-            idxs = np.random.choice(n_windows, size=self.batch_size,
-                                    replace=(n_windows < self.batch_size))
-            complete_batch = batch[idxs]
-        return complete_batch
+    self.i = 0
+    return self
 
-    def __next__(self):
-        if self.i >= self.dataset_len:
-            raise StopIteration
-        idxs = self.idxs[self.i:(self.i + self.batch_size)].tolist()
-        batch = self.dataset[idxs]
-        self.i += self.batch_size
-        return {key: self._check_batch_size(batch[key]) for key in batch}
+# Cell
+@patch
+def _check_batch_size(self: FastTimeSeriesLoader, batch: t.Tensor):
+    complete_batch = batch
+    if self.eq_batch_size and self.batch_size is not None:
+        n_windows = batch.size(0)
+        idxs = np.random.choice(n_windows, size=self.batch_size,
+                                replace=(n_windows < self.batch_size))
+        complete_batch = batch[idxs]
+    return complete_batch
 
-    def __len__(self):
-        return self.n_batches
+# Cell
+@patch
+def __next__(self: FastTimeSeriesLoader):
+    if self.i >= self.dataset_len:
+        raise StopIteration
+    idxs = self.idxs[self.i:(self.i + self.batch_size)].tolist()
+    batch = self.dataset[idxs]
+    self.i += self.batch_size
+    return {key: self._check_batch_size(batch[key]) for key in batch}
+
+# Cell
+@patch
+def __len__(self: FastTimeSeriesLoader):
+    return self.n_batches
