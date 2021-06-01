@@ -122,8 +122,8 @@ index = {"Scaler": "data__scalers.ipynb",
          "SOLAR_TASKS": "data_datasets__gefcom2014.ipynb",
          "GEFCom2014_S_Info": "data_datasets__gefcom2014.ipynb",
          "GEFCom2014_S": "data_datasets__gefcom2014.ipynb",
-         "Yearly": "data_datasets__tourism.ipynb",
-         "Quarterly": "data_datasets__tourism.ipynb",
+         "Yearly": "models_nbeats__nbeats_model_ensemble.ipynb",
+         "Quarterly": "models_nbeats__nbeats_model_ensemble.ipynb",
          "Monthly": "data_datasets__tourism.ipynb",
          "Other": "data_datasets__m4.ipynb",
          "M3Info": "data_datasets__m3.ipynb",
@@ -217,7 +217,9 @@ index = {"Scaler": "data__scalers.ipynb",
          "ExogenousBasisInterpretable": "models_nbeats__nbeats_model.ipynb",
          "ExogenousBasisWavenet": "models_nbeats__nbeats_model.ipynb",
          "ExogenousBasisTCN": "models_nbeats__nbeats_model.ipynb",
-         "NBEATS": "models_nbeats__nbeats_model.ipynb"}
+         "NBEATS": "models_nbeats__nbeats_model.ipynb",
+         "common_grid": "models_nbeats__nbeats_model_ensemble.ipynb",
+         "EnsembleNBEATS": "models_nbeats__nbeats_model_ensemble.ipynb"}
 
 modules = ["data/scalers.py",
            "data/tsdataset.py",
@@ -242,7 +244,8 @@ modules = ["data/scalers.py",
            "models/esrnn/mqesrnn.py",
            "models/naive2/naive2.py",
            "models/nbeats/nbeats.py",
-           "models/nbeats/nbeats_model.py"]
+           "models/nbeats/nbeats_model.py",
+           "models/nbeats/nbeats_model_ensemble.py"]
 
 doc_url = "https://Grupo-Abraxas.github.io/nixtla/"
 

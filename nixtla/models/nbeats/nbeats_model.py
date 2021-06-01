@@ -527,6 +527,7 @@ class NBEATS(pl.LightningModule):
         Parameters
         ----------
         # TODO: Fix parameters' documentation.
+        # TODO: Remove useless parameters (dropout_prob_exogenous).
         n_time_in: int
             Multiplier to get insample size.
             Insample size = n_time_in * output_size
@@ -597,7 +598,7 @@ class NBEATS(pl.LightningModule):
             Usually 7 for daily data, 12 for monthly data and 4 for weekly data.
         """
 
-        if activation == 'selu': initialization = 'lecun_normal'
+        if activation == 'SELU': initialization = 'lecun_normal'
 
         #------------------------ Model Attributes ------------------------#
         # Architecture parameters
@@ -713,8 +714,8 @@ class NBEATS(pl.LightningModule):
             return outsample_y, forecast, block_forecast, outsample_mask
 
         outsample_y, forecast, outsample_mask = self.model(S=S, Y=Y, X=X,
-                                           insample_mask=available_mask,
-                                           return_decomposition=False)
+                                                           insample_mask=available_mask,
+                                                           return_decomposition=False)
         return outsample_y, forecast, outsample_mask
 
     def configure_optimizers(self):
