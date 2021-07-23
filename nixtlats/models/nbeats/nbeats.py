@@ -680,7 +680,8 @@ class NBEATS(pl.LightningModule):
 
         self.log('train_loss', loss, prog_bar=True, on_epoch=True)
 
-        return loss
+        if np.isnan(float(loss)): return None
+        else: return loss
 
     def validation_step(self, batch, idx):
         S = batch['S']

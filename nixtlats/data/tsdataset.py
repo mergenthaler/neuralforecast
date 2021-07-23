@@ -30,7 +30,7 @@ class BaseDataset(Dataset):
                  is_test: bool = False,
                  input_size: int = None,
                  output_size: int = None,
-                 complete_windows: bool = True,
+                 complete_sample: bool = True,
                  verbose: bool = False) -> 'BaseDataset':
         """
         Parameters
@@ -58,8 +58,9 @@ class BaseDataset(Dataset):
             Size of the training sets.
         output_size: int
             Forecast horizon.
-        complete_windows: bool
-            Whether consider only windows with available window_size.
+        complete_sample: bool
+            Whether consider only windows with complete
+            sampleable outputs.
             Default False.
         verbose: bool
             Wheter or not log outputs.
@@ -119,7 +120,7 @@ class BaseDataset(Dataset):
         self.f_idxs = self._get_f_idxs(f_cols) if f_cols else []
         self.input_size = input_size
         self.output_size = output_size
-        self.complete_windows = complete_windows
+        self.complete_sample = complete_sample
         self.first_ds = 0
 
         # Number of X and S features
@@ -384,7 +385,7 @@ class TimeSeriesDataset(BaseDataset):
                  mask_df: Optional[pd.DataFrame] = None,
                  ds_in_test: int = 0,
                  is_test: bool = False,
-                 complete_windows: bool = True,
+                 complete_sample: bool = False,
                  verbose: bool = False) -> 'TimeSeriesDataset':
         """
         Parameters
@@ -412,6 +413,10 @@ class TimeSeriesDataset(BaseDataset):
         is_test: bool
             Only used when mask_df = None.
             Wheter target time series belongs to test set.
+        complete_sample: bool
+            Whether consider only windows with complete
+            sampleable outputs.
+            Default False.
         verbose: bool
             Wheter or not log outputs.
         """
@@ -419,7 +424,7 @@ class TimeSeriesDataset(BaseDataset):
                                                 output_size=output_size,
                                                 X_df=X_df, S_df=S_df, f_cols=f_cols,
                                                 mask_df=mask_df, ds_in_test=ds_in_test,
-                                                is_test=is_test, complete_windows=complete_windows,
+                                                is_test=is_test, complete_sample=complete_sample,
                                                 verbose=verbose)
 
 # Cell
@@ -484,8 +489,7 @@ class WindowsDataset(BaseDataset):
                  ds_in_test: int = 0,
                  is_test: bool = False,
                  sample_freq: int = 1,
-                 complete_windows: bool = True,
-                 last_window: bool = False,
+                 complete_sample: bool = False,
                  verbose: bool = False) -> 'TimeSeriesDataset':
         """
         Parameters
@@ -513,9 +517,11 @@ class WindowsDataset(BaseDataset):
         is_test: bool
             Only used when mask_df = None.
             Wheter target time series belongs to test set.
-        last_window: bool
-            Only used for forecast (test)
-            Wheter the dataset will include only last window for each time serie.
+        sample_freq: int
+        complete_sample: bool
+            Whether consider only windows with complete
+            sampleable outputs.
+            Default False.
         verbose: bool
             Wheter or not log outputs.
         """
@@ -523,13 +529,13 @@ class WindowsDataset(BaseDataset):
                                              output_size=output_size,
                                              X_df=X_df, S_df=S_df, f_cols=f_cols,
                                              mask_df=mask_df, ds_in_test=ds_in_test,
-                                             is_test=is_test, complete_windows=complete_windows,
+                                             is_test=is_test, complete_sample=complete_sample,
                                              verbose=verbose)
         # WindowsDataset parameters
         self.windows_size = self.input_size + self.output_size
         self.padding = (self.input_size, self.output_size)
         self.sample_freq = sample_freq
-        self.last_window = last_window
+
 
 # Cell
 @patch
@@ -562,7 +568,7 @@ def _create_windows_tensor(self: WindowsDataset,
     windows = tensor.unfold(dimension=-1,
                             size=self.windows_size,
                             step=self.sample_freq)
-    # n_serie, n_channel, n_time, window_size -> n_serie, n_time, n_channel, window_size
+
     windows = windows.permute(0, 2, 1, 3)
     windows = windows.reshape(-1, self.n_channels, self.windows_size)
 
@@ -579,8 +585,7 @@ def _create_windows_tensor(self: WindowsDataset,
     s_matrix = t.Tensor(s_matrix)
     ts_idxs = t.as_tensor(ts_idxs, dtype=t.long)
 
-    windows_idxs = self._get_sampleable_windows_idxs(ts_windows_flatten=windows,
-                                                     ts_idxs=ts_idxs)
+    windows_idxs = self._get_sampleable_windows_idxs(ts_windows_flatten=windows)
 
     # Raise error if nothing to sample from
     if not windows_idxs.size:
@@ -601,8 +606,7 @@ def _create_windows_tensor(self: WindowsDataset,
 @patch
 #TODO: do we want complete? inputs seems irrelevant, NBEATS dont use it, for now is our only model
 def _get_sampleable_windows_idxs(self: WindowsDataset,
-                                 ts_windows_flatten: t.Tensor,
-                                 ts_idxs: t.Tensor) -> np.ndarray:
+                                 ts_windows_flatten: t.Tensor) -> np.ndarray:
     """Gets indexes of windows that fulfills conditions.
 
     Parameters
@@ -619,21 +623,20 @@ def _get_sampleable_windows_idxs(self: WindowsDataset,
     -----
     """
 
-    if self.last_window:
-        _, idxs_counts = t.unique(ts_idxs, return_counts=True)
-        last_idxs = idxs_counts.cumsum(0) - 1
-        last_idxs = last_idxs.numpy()
-
-        return last_idxs
+    if self.complete_sample:
+        sample_condition = ts_windows_flatten[:, self.t_cols.index('sample_mask'), -(self.output_size):]
+        sample_condition = t.sum(sample_condition, axis=1)
+        sample_condition = (sample_condition == self.output_size) * 1
 
     else:
         sample_condition = ts_windows_flatten[:, self.t_cols.index('sample_mask'), -self.output_size:]
         sample_condition = t.sum(sample_condition, axis=1)
         sample_condition = (sample_condition > 0) * 1
-        sampling_idx = t.nonzero(sample_condition > 0)
-        sampling_idx = sampling_idx.flatten().numpy()
 
-        return sampling_idx
+    sampling_idx = t.nonzero(sample_condition > 0)
+    sampling_idx = sampling_idx.flatten().numpy()
+
+    return sampling_idx
 
 # Cell
 @patch

@@ -192,9 +192,12 @@ def MASELoss(y, y_hat, y_insample, seasonality, mask=None) :
     delta_y = t.abs(y - y_hat)
     scale = t.mean(t.abs(y_insample[:, seasonality:] - \
                             y_insample[:, :-seasonality]), axis=1)
-    mase = divide_no_nan(delta_y, scale[:, None])
-    mase = mase * mask
+    # mase = divide_no_nan(delta_y, scale[:, None])
+    # mase = mase * mask
+    mase = delta_y * divide_no_nan(mask, scale[:, None])
+
     mase = t.mean(mase)
+
     return mase
 
 # Cell
