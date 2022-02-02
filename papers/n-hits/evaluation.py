@@ -34,7 +34,7 @@ def get_scores_min_test(dir):
 def main(args):
 
     if args.horizon<0:
-        if args.dataset == 'ili':
+        if args.dataset == 'ILI':
             horizons = [24, 36, 48, 60]
         else:
             horizons = [96, 192, 336, 720]
