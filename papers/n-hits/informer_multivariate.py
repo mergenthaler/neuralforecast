@@ -11,7 +11,7 @@ from hyperopt import fmin, tpe, hp, Trials, STATUS_OK
 
 def get_experiment_space(args):
     space= {# Architecture parameters
-            'model':'autoformer',
+            'model':'informer',
             'mode': 'iterate_windows',
             'seq_len': hp.choice('seq_len', [args.seq_len]),
             'label_len': hp.choice('label_len', [args.label_len]),
@@ -29,7 +29,7 @@ def get_experiment_space(args):
             'factor': hp.choice('factor', [args.factor]),
             'n_heads': hp.choice('n_heads', [8]),
             'd_ff': hp.choice('d_ff', [2_048]),
-            'moving_avg': hp.choice('moving_avg', [25]),
+            'distil': hp.choice('distil', [True]),
             'activation': hp.choice('activation', ['gelu']),
             # Regularization and optimization parameters
             'learning_rate': hp.choice('learning_rate', [1e-4]),
@@ -105,7 +105,7 @@ def main(args):
     
     space = get_experiment_space(args)
 
-    output_dir = f'./results/multivariate/{args.dataset}_{args.horizon}/autoformer/'
+    output_dir = f'./results/multivariate/{args.dataset}_{args.horizon}/informer/'
 
     os.makedirs(output_dir, exist_ok = True)
     assert os.path.exists(output_dir), f'Output dir {output_dir} does not exist'
