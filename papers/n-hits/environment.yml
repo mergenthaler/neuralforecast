@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - pip
+  - setuptools=58.2.0
+  - pip:
+    - neuralforecast
+    - torch==1.9.0
+    - jupyterlab
