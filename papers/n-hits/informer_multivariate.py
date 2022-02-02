@@ -1,6 +1,7 @@
 import argparse
 import os
 import pickle
+import time
 from math import ceil
 
 from neuralforecast.data.datasets.long_horizon import LongHorizon

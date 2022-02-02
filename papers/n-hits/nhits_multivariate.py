@@ -3,7 +3,7 @@ import os
 import pickle
 import time
 
-from neutalforecast.data.datasets.long_horizon import LongHorizon
+from neuralforecast.data.datasets.long_horizon import LongHorizon
 from neuralforecast.experiments.utils import hyperopt_tunning
 from neuralforecast.losses.numpy import mae, mse
 from hyperopt import fmin, tpe, hp, Trials, STATUS_OK
@@ -130,11 +130,11 @@ if __name__ == '__main__':
 
     horizons = [96, 192, 336, 720]
     ILI_horizons = [24, 36, 48, 60]
-    datasets = ['ETTm2', 'ECL', 'Exchange', 'Traffic', 'Weather', 'ILI']
+    datasets = ['ILI', 'Exchange', 'Weather', 'ETTm2', 'ECL', 'Traffic'] 
 
     for dataset in datasets:
         # Horizon
-        if dataset == 'ili':
+        if dataset == 'ILI':
             horizons_dataset = ILI_horizons
         else:
             horizons_dataset = horizons
